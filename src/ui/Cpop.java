@@ -8,12 +8,12 @@ package ui;
  *
  * @author trwil
  */
-public class AppPanel extends javax.swing.JPanel {
+public class Cpop extends javax.swing.JPanel {
 
     /**
-     * Creates new form aPanel
+     * Creates new form cPop
      */
-    public AppPanel() {
+    public Cpop() {
         initComponents();
     }
 
@@ -26,32 +26,19 @@ public class AppPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
-
-        setBackground(new java.awt.Color(250, 7, 230));
-
-        jCheckBox1.setText("jCheckBox1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jCheckBox1)
-                .addContainerGap(270, Short.MAX_VALUE))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jCheckBox1)
-                .addContainerGap(210, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
     // End of variables declaration//GEN-END:variables
 }

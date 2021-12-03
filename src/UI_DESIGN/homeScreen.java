@@ -1,5 +1,6 @@
 package UI_DESIGN;
 
+import javax.swing.*;
 public class HomeScreen extends javax.swing.JFrame {
     /**
      * Creates new form homeScreen
@@ -21,14 +22,9 @@ public class HomeScreen extends javax.swing.JFrame {
         appBtn = new javax.swing.JButton();
         mbtn = new javax.swing.JButton();
         eBtn = new javax.swing.JButton();
-        parentPanel = new javax.swing.JPanel();
-        cPanel = new javax.swing.JPanel();
-        empPanel = new javax.swing.JPanel();
-        appPanel = new javax.swing.JPanel();
-        mPanel = new javax.swing.JPanel();
-        ePanel = new javax.swing.JPanel();
         tPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        infoArea = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,85 +110,6 @@ public class HomeScreen extends javax.swing.JFrame {
 
         getContentPane().add(BtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 470));
 
-        parentPanel.setLayout(new java.awt.CardLayout());
-
-        cPanel.setBackground(new java.awt.Color(20, 156, 65));
-
-        javax.swing.GroupLayout cPanelLayout = new javax.swing.GroupLayout(cPanel);
-        cPanel.setLayout(cPanelLayout);
-        cPanelLayout.setHorizontalGroup(
-            cPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        cPanelLayout.setVerticalGroup(
-            cPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        parentPanel.add(cPanel, "card2");
-
-        empPanel.setBackground(new java.awt.Color(217, 135, 20));
-
-        javax.swing.GroupLayout empPanelLayout = new javax.swing.GroupLayout(empPanel);
-        empPanel.setLayout(empPanelLayout);
-        empPanelLayout.setHorizontalGroup(
-            empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        empPanelLayout.setVerticalGroup(
-            empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        parentPanel.add(empPanel, "card3");
-
-        appPanel.setBackground(new java.awt.Color(250, 7, 230));
-
-        javax.swing.GroupLayout appPanelLayout = new javax.swing.GroupLayout(appPanel);
-        appPanel.setLayout(appPanelLayout);
-        appPanelLayout.setHorizontalGroup(
-            appPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        appPanelLayout.setVerticalGroup(
-            appPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        parentPanel.add(appPanel, "card5");
-
-        mPanel.setBackground(new java.awt.Color(53, 232, 226));
-
-        javax.swing.GroupLayout mPanelLayout = new javax.swing.GroupLayout(mPanel);
-        mPanel.setLayout(mPanelLayout);
-        mPanelLayout.setHorizontalGroup(
-            mPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        mPanelLayout.setVerticalGroup(
-            mPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        parentPanel.add(mPanel, "card4");
-
-        ePanel.setBackground(new java.awt.Color(242, 250, 7));
-
-        javax.swing.GroupLayout ePanelLayout = new javax.swing.GroupLayout(ePanel);
-        ePanel.setLayout(ePanelLayout);
-        ePanelLayout.setHorizontalGroup(
-            ePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        ePanelLayout.setVerticalGroup(
-            ePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        parentPanel.add(ePanel, "card6");
-
-        getContentPane().add(parentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 700, 440));
-
         tPanel.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -215,100 +132,83 @@ public class HomeScreen extends javax.swing.JFrame {
 
         getContentPane().add(tPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 80));
 
+        infoArea.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(infoArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 700, 430));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBtnActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(cPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+        if (currentPanel != clientPanel){
+            infoArea.removeAll();
+            infoArea.add(clientPanel);
+            infoArea.repaint();
+            infoArea.revalidate();
+            currentPanel = clientPanel;
+        }
+             
     }//GEN-LAST:event_cBtnActionPerformed
 
     
     private void empBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empBtnActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(empPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+             if (currentPanel != employeePanel){
+            infoArea.removeAll();
+            infoArea.add(employeePanel);
+            infoArea.repaint();
+            infoArea.revalidate();
+            currentPanel = employeePanel;
+        }
+        
     }//GEN-LAST:event_empBtnActionPerformed
 
     
     private void appBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appBtnActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(appPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+         if (currentPanel != appPanel){
+            infoArea.removeAll();
+            infoArea.add(appPanel);
+            infoArea.repaint();
+            infoArea.revalidate();
+            currentPanel = appPanel;
     }//GEN-LAST:event_appBtnActionPerformed
-
+  }
     
     private void mbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbtnActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(mPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+       if (currentPanel != manPanel){
+            infoArea.removeAll();
+            infoArea.add(manPanel);
+            infoArea.repaint();
+            infoArea.revalidate();
+            currentPanel = manPanel;
     }//GEN-LAST:event_mbtnActionPerformed
-
+  }
     
     private void eBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eBtnActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(ePanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+     if (currentPanel != ePanel){
+            infoArea.removeAll();
+            infoArea.add(ePanel);
+            infoArea.repaint();
+            infoArea.revalidate();
+            currentPanel = ePanel;
     }//GEN-LAST:event_eBtnActionPerformed
-
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-              new HomeScreen().setVisible(true);
-            }
-        });
     }
+
+    private JPanel employeePanel = new EmpPanel();
+    private JPanel clientPanel = new CPanel();
+    private JPanel appPanel = new AppPanel();
+    private JPanel manPanel = new ManPanel();
+    private JPanel ePanel = new EPanel();
+    private JPanel currentPanel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BtnPanel;
     private javax.swing.JButton appBtn;
-    private javax.swing.JPanel appPanel;
     private javax.swing.JButton cBtn;
-    private javax.swing.JPanel cPanel;
     private javax.swing.JButton eBtn;
-    private javax.swing.JPanel ePanel;
     private javax.swing.JButton empBtn;
-    private javax.swing.JPanel empPanel;
+    private javax.swing.JPanel infoArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel mPanel;
     private javax.swing.JButton mbtn;
-    private javax.swing.JPanel parentPanel;
     private javax.swing.JPanel tPanel;
     // End of variables declaration//GEN-END:variables
 }

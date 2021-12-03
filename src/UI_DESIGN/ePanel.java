@@ -8,12 +8,12 @@ package UI_DESIGN;
  *
  * @author trwil
  */
-public class ePanel extends javax.swing.JPanel {
+public class EPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ePanel
      */
-    public ePanel() {
+    public EPanel() {
         initComponents();
     }
 

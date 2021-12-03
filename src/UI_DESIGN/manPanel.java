@@ -8,12 +8,12 @@ package UI_DESIGN;
  *
  * @author trwil
  */
-public class manPanel extends javax.swing.JPanel {
+public class ManPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form man
      */
-    public manPanel() {
+    public ManPanel() {
         initComponents();
     }
 

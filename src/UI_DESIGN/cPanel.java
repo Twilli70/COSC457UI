@@ -8,12 +8,12 @@ package UI_DESIGN;
  *
  * @author trwil
  */
-public class cPanel extends javax.swing.JPanel {
+public class CPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form cPanel
      */
-    public cPanel() {
+    public CPanel() {
         initComponents();
     }
 
@@ -25,6 +25,8 @@ public class cPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(new java.awt.Color(20, 156, 65));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

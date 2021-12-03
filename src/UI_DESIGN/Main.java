@@ -3,18 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package UI_DESIGN;
-
-/**
- *
- * @author trwil
- */
-public class JavaApplication3 {
-
-    /**
-     * @param args the command line arguments
-     */
+ 
+public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
+      var homeScreen1 = new homeScreen();
+      homeScreen1.setVisible(true);
     }
     
 }
+

@@ -1,4 +1,4 @@
-package UI_DESIGN;
+package ui;
 
 import javax.swing.*;
 public class HomeScreen extends javax.swing.JFrame {

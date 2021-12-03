@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI_DESIGN;
+package ui;
 
 /**
  *
  * @author trwil
  */
-public class AppPanel extends javax.swing.JPanel {
+public class ManPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form aPanel
+     * Creates new form man
      */
-    public AppPanel() {
+    public ManPanel() {
         initComponents();
     }
 
@@ -26,32 +26,32 @@ public class AppPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(250, 7, 230));
+        setBackground(new java.awt.Color(53, 232, 226));
 
-        jCheckBox1.setText("jCheckBox1");
+        jButton1.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jCheckBox1)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addGap(93, 93, 93)
+                .addComponent(jButton1)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jCheckBox1)
-                .addContainerGap(210, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(143, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(134, 134, 134))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

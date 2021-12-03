@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI_DESIGN;
+package ui;
 
 /**
  *
  * @author trwil
  */
-public class ManPanel extends javax.swing.JPanel {
+public class CPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form man
+     * Creates new form cPanel
      */
-    public ManPanel() {
+    public CPanel() {
         initComponents();
     }
 
@@ -28,7 +28,7 @@ public class ManPanel extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(53, 232, 226));
+        setBackground(new java.awt.Color(20, 156, 65));
 
         jButton1.setText("jButton1");
 
@@ -37,16 +37,16 @@ public class ManPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(157, 157, 157)
                 .addComponent(jButton1)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addComponent(jButton1)
-                .addGap(134, 134, 134))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

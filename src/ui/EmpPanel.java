@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI_DESIGN;
+package ui;
 
 /**
  *
  * @author trwil
  */
-public class CPanel extends javax.swing.JPanel {
+public class EmpPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form cPanel
+     * Creates new form Employee
      */
-    public CPanel() {
+    public EmpPanel() {
         initComponents();
     }
 
@@ -26,32 +26,32 @@ public class CPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(20, 156, 65));
+        setBackground(new java.awt.Color(217, 135, 20));
 
-        jButton1.setText("jButton1");
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jButton1)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(170, 170, 170)
+                .addComponent(jLabel1)
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jButton1)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addGap(104, 104, 104)
+                .addComponent(jLabel1)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

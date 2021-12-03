@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI_DESIGN;
+package ui;
 
 /**
  *
  * @author trwil
  */
-public class EPanel extends javax.swing.JPanel {
+public class AppPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ePanel
+     * Creates new form aPanel
      */
-    public EPanel() {
+    public AppPanel() {
         initComponents();
     }
 
@@ -28,7 +28,7 @@ public class EPanel extends javax.swing.JPanel {
 
         jCheckBox1 = new javax.swing.JCheckBox();
 
-        setBackground(new java.awt.Color(242, 250, 7));
+        setBackground(new java.awt.Color(250, 7, 230));
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -36,17 +36,17 @@ public class EPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addComponent(jCheckBox1)
-                .addGap(44, 44, 44))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(67, 67, 67)
                 .addComponent(jCheckBox1)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

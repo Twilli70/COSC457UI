@@ -8,12 +8,12 @@ package ui;
  *
  * @author trwil
  */
-public class Cpop extends javax.swing.JPanel {
+public class Appop extends javax.swing.JPanel {
 
     /**
      * Creates new form cPop
      */
-    public Cpop() {
+    public Appop() {
         initComponents();
     }
 

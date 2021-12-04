@@ -25,6 +25,10 @@ public class HomeScreen extends javax.swing.JFrame {
         tPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         infoArea = new javax.swing.JPanel();
+        TableScroll = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        Add = new javax.swing.JButton();
+        Remove = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,7 +136,30 @@ public class HomeScreen extends javax.swing.JFrame {
 
         getContentPane().add(tPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 80));
 
+        infoArea.setBackground(new java.awt.Color(119, 120, 119));
         infoArea.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TableScroll.setViewportView(jTable2);
+
+        infoArea.add(TableScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 660, 370));
+
+        Add.setText("Add");
+        infoArea.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 80, -1));
+
+        Remove.setText("Remove");
+        infoArea.add(Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 80, -1));
+
         getContentPane().add(infoArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 700, 430));
 
         pack();
@@ -200,7 +227,10 @@ public class HomeScreen extends javax.swing.JFrame {
     private JPanel currentPanel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Add;
     private javax.swing.JPanel BtnPanel;
+    private javax.swing.JButton Remove;
+    private javax.swing.JScrollPane TableScroll;
     private javax.swing.JButton appBtn;
     private javax.swing.JButton cBtn;
     private javax.swing.JButton eBtn;
@@ -208,6 +238,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JPanel infoArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton mbtn;
     private javax.swing.JPanel tPanel;
     // End of variables declaration//GEN-END:variables

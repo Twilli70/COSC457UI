@@ -33,10 +33,10 @@
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="eq3" min="-2" pref="197" max="-2" attributes="0"/>
                           <Component id="inv1" min="-2" pref="197" max="-2" attributes="0"/>
                           <Component id="eq2" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
                           <Component id="eq1" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Component id="eq3" alignment="0" min="-2" pref="197" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">

@@ -26,52 +26,63 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="spLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="spLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bclabel1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="sp1" min="-2" pref="429" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="Alabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="a1" min="-2" pref="429" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="sp1" min="-2" pref="429" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="isAnnually" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="isQuarterly" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="eqCost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="edLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lcLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sdlabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lc1" min="-2" pref="429" max="-2" attributes="0"/>
-                                  <Component id="eq1" min="-2" pref="429" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jDateChooser1" alignment="0" pref="183" max="32767" attributes="0"/>
+                                      <Component id="jDateChooser2" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
                       <Component id="saveP" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="96" max="32767" attributes="0"/>
+              <EmptySpace pref="98" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Alabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="a1" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="sdlabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="eqCost" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="eq1" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="edLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lcLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lc1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -82,43 +93,34 @@
                   <Component id="sp1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="bclabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="isAnnually" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="isQuarterly" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="65" max="32767" attributes="0"/>
               <Component id="saveP" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="151" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="Alabel">
+    <Component class="javax.swing.JLabel" name="sdlabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Appointment ID: "/>
+        <Property name="text" type="java.lang.String" value="Start Date:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="a1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="a1ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="saveP">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="eqCost">
+    <Component class="javax.swing.JLabel" name="edLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Equipment Cost:"/>
+        <Property name="text" type="java.lang.String" value="End Date:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="eq1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eq1ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lcLabel">
       <Properties>
@@ -145,6 +147,33 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sp1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="bclabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bill Cycle:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="isAnnually">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Annually"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="isQuarterly">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Quarterly"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="isQuarterlyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jCheckBox1"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

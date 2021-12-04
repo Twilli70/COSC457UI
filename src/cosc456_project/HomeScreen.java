@@ -9,6 +9,9 @@ public class HomeScreen extends javax.swing.JFrame {
      */
     private ClientPage clientPage = new ClientPage();
     private DatabaseEditor employeePage = new DatabaseEditor();
+    private DatabaseEditor appointmentPage = new DatabaseEditor();
+    private DatabaseEditor manufacturerPage = new DatabaseEditor();
+    private DatabaseEditor equipmentPage = new DatabaseEditor();
     private JPanel currentPage;
     
     public HomeScreen() {
@@ -75,10 +78,25 @@ public class HomeScreen extends javax.swing.JFrame {
         });
 
         appointmentBtn.setText("Appointments");
+        appointmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentBtnActionPerformed(evt);
+            }
+        });
 
         manufacturerBtn.setText("Manufacturer");
+        manufacturerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manufacturerBtnActionPerformed(evt);
+            }
+        });
 
         equipmentBtn.setText("Equipment");
+        equipmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equipmentBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnPanelLayout = new javax.swing.GroupLayout(btnPanel);
         btnPanel.setLayout(btnPanelLayout);
@@ -150,6 +168,18 @@ public class HomeScreen extends javax.swing.JFrame {
     private void employeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeBtnActionPerformed
         switchToPage(employeePage);
     }//GEN-LAST:event_employeeBtnActionPerformed
+
+    private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
+        switchToPage(appointmentPage);
+    }//GEN-LAST:event_appointmentBtnActionPerformed
+
+    private void manufacturerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manufacturerBtnActionPerformed
+        switchToPage(manufacturerPage);
+    }//GEN-LAST:event_manufacturerBtnActionPerformed
+
+    private void equipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentBtnActionPerformed
+        switchToPage(equipmentPage);
+    }//GEN-LAST:event_equipmentBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointmentBtn;

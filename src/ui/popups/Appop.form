@@ -46,24 +46,29 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="n2" min="-2" pref="195" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="s1" min="-2" pref="197" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="email1" max="32767" attributes="0"/>
-                  </Group>
                   <Component id="a1" alignment="0" max="32767" attributes="0"/>
                   <Component id="a2" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="c1" min="-2" pref="197" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="c1" min="-2" pref="197" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="sdLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="s1" min="-2" pref="197" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="edLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="pnLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="pn1" pref="194" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jDateChooser2" pref="286" max="32767" attributes="0"/>
+                          <Component id="jDateChooser1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="94" max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,31 +81,37 @@
                   <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="n2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="n1" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="aLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="a1" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="a2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cLabel" alignment="3" min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="c1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="pnLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="pn1" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="sLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="s1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="email1" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="n2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="n1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="aLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="a1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="a2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cLabel" alignment="3" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="c1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="sdLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="sLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="edLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="s1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -196,31 +207,19 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="pnLabel">
+    <Component class="javax.swing.JLabel" name="sdLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Phone Number:"/>
+        <Property name="text" type="java.lang.String" value="Start Date:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="pn1">
+    <Component class="javax.swing.JLabel" name="edLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pn1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="emailLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Emaill:"/>
+        <Property name="text" type="java.lang.String" value="End Date:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="email1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="email1ActionPerformed"/>
-      </Events>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
     </Component>
   </SubComponents>
 </Form>

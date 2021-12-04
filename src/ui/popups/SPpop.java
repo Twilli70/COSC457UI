@@ -38,7 +38,6 @@ public class SPpop extends javax.swing.JPanel {
         isQuarterly = new javax.swing.JCheckBox();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jCheckBox1 = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(119, 120, 119));
 
@@ -77,8 +76,6 @@ public class SPpop extends javax.swing.JPanel {
             }
         });
 
-        jCheckBox1.setText("jCheckBox1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,9 +95,7 @@ public class SPpop extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(isAnnually)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(isQuarterly)
-                                        .addGap(89, 89, 89)
-                                        .addComponent(jCheckBox1))))
+                                        .addComponent(isQuarterly))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(edLabel)
@@ -140,8 +135,7 @@ public class SPpop extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bclabel1)
                     .addComponent(isAnnually)
-                    .addComponent(isQuarterly)
-                    .addComponent(jCheckBox1))
+                    .addComponent(isQuarterly))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(saveP)
                 .addGap(63, 63, 63))
@@ -166,7 +160,6 @@ public class SPpop extends javax.swing.JPanel {
     private javax.swing.JLabel edLabel;
     private javax.swing.JCheckBox isAnnually;
     private javax.swing.JCheckBox isQuarterly;
-    private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JTextField lc1;

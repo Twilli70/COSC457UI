@@ -38,8 +38,6 @@
                                       <Component id="isAnnually" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="isQuarterly" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -97,7 +95,6 @@
                   <Component id="bclabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="isAnnually" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="isQuarterly" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="65" max="32767" attributes="0"/>
               <Component id="saveP" min="-2" max="-2" attributes="0"/>
@@ -169,11 +166,6 @@
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox1"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

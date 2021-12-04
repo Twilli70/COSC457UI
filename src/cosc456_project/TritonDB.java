@@ -1,3 +1,5 @@
+package cosc456_project;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -37,7 +39,54 @@ public class TritonDB {
         }
         return null;
     }
+    
+    public String[] getResultColumns(ResultSet result){
+        try{
+            var resultMeta = result.getMetaData();
+            var columnCount = resultMeta.getColumnCount();
+            var columnNames = new String[columnCount];
+            var rowEntries = new ArrayList<String[]>();
+            
+            for (int i = 1; i <= columnCount; i++){
+                columnNames[i - 1] = resultMeta.getColumnName(i);
+            }
+            return columnNames;
 
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
+    public String[][] getResultRows(ResultSet result){
+        try{
+            var resultMeta = result.getMetaData();
+            var columnCount = resultMeta.getColumnCount();
+            var rowList = new ArrayList<String[]>();
+            
+            while(result.next()){
+                var rowEntry = new String[columnCount];
+                for (int i = 1; i <= columnCount; i++){
+                    rowEntry[i - 1] = result.getString(i);
+                }
+                rowList.add(rowEntry);
+            }
+            
+            var rows = new String[rowList.size()][rowList.get(0).length];
+            for(int i = 0; i < rowList.size(); i++){
+                rows[i] = rowList.get(i);
+            }
+            return rows;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
     public void printResult(ResultSet result){
         if (result != null){
             try {

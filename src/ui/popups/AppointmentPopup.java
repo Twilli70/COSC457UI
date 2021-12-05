@@ -88,13 +88,15 @@ public class AppointmentPopup extends javax.swing.JFrame {
         var eID = "55666";
         var aLocation = a2.getText();
         var estimate = Integer.getInteger(a3.getText());
-        var sDate = jDateChooser1.getDate().toString();
-        var eDate = jDateChooser2.getDate().toString();
+        var sDate = jDateChooser1.getDate();
+        var eDate = jDateChooser2.getDate();
         var aID = triton.selectMax("Appointment", "aID") + 1;
-        var insertion = "INSERT INTO (aId, fName, lName, sDate, eDate, aLocation, estimate)\n";
+        //var insertion = "INSERT INTO (aId, fName, lName, sDate, eDate, aLocation, estimate)\n";
         //insertion += 
-        System.out.print(String.format("VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d)", aID, sDate, eDate,aLocation, estimate));
-        triton.executeUpdate(String.format("INSERT INTO Appointment(aID, c_ID, empID, eID, sDate, eDate,aLocation, estimate)\n VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d)", aID, c_ID, empID,eID, sDate, eDate,aLocation, estimate));
+        System.out.print(String.format("VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d)"
+                , aID, sDate, eDate,aLocation, estimate));
+        triton.executeUpdate(String.format("INSERT INTO Appointment(aID, c_ID, empID, eID, sDate, eDate,aLocation, estimate)"
+                + "\n VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d)", aID, c_ID, empID,eID, sDate, eDate,aLocation, estimate));
 
         setVisible(false);
     

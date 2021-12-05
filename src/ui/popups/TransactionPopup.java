@@ -4,6 +4,10 @@
  */
 package ui.popups;
 
+import cosc456_project.TritonDB;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 /**
  *
  * @author trwil
@@ -13,8 +17,67 @@ public class TransactionPopup extends javax.swing.JFrame {
     /**
      * Creates new form cPop
      */
+    private Hashtable<Integer,String> clientIdByIndex = new Hashtable<Integer,String>();
+    
     public TransactionPopup() {
         initComponents();
+    }
+    
+    @Override
+    public void setVisible(boolean visible){
+        super.setVisible(visible);
+        if (visible)
+            updateAppointmentComboBox();
+    }
+    
+    public void updateAppointmentComboBox(){
+        appIDComboBox.removeAll();
+        clientIdByIndex.clear();
+        var triton = TritonDB.getInstance();
+        try{
+           var clients = new ArrayList<String>();
+           var result = triton.executeQuery("SELECT cID FROM Client");
+           var clientIDs = triton.getResultRows(result);
+           var index = 0;
+           for(var row : clientIDs){
+               var cID = row[0];
+               var idType = triton.getResultRows(triton.executeQuery("SELECT is_Res, is_Bus FROM Client_Type WHERE cID = " + cID));
+               var isResidential = idType[0][0].equals("1");
+               var isBusiness = idType[0][1].equals("1");
+               var clientName = "";
+               
+               if (isResidential){
+                   var resNameRows = triton.getResultRows(triton.executeQuery("SELECT fName, lName FROM Residential WHERE cID = " + cID));
+                   var firstName = resNameRows[0][0];
+                   var lastName = resNameRows[0][1];
+                   clientName = firstName + " " + lastName;
+               }
+               else if (isBusiness){
+                   var resNameRows = triton.getResultRows(triton.executeQuery("SELECT bName FROM Business WHERE cID = " + cID));
+                   var bName = resNameRows[0][0] + " (business)";
+                   clientName = bName;
+               }
+               var appointmentData = triton.getResultRows(triton.executeQuery("SELECT sDate, aLocation, aID FROM Appointment WHERE c_ID = " + cID));
+               if (appointmentData != null && !clientName.isEmpty()){
+                   var aID = appointmentData[0][2];
+                   appIDComboBox.addItem(String.format("With %s on %s at %s", clientName, appointmentData[0][0], appointmentData[0][1]));
+                   clientIdByIndex.put(index, aID);
+                   index++;
+               }
+
+           }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertIntoDB(String aID, int equipCost, int laborCost, int spCost){        
+        var triton = TritonDB.getInstance();
+        var tID = triton.selectMax("Transactions", "tID") + 1;
+        var insert = "INSERT INTO Transactions(tID, aID, EquipCost, LaborCost, SPCost)\n";
+        insert += String.format("VALUES('%s', '%s', %d, %d, %d)", tID, aID, equipCost, laborCost, spCost);
+        triton.executeUpdate(insert);
     }
 
     /**
@@ -27,92 +90,94 @@ public class TransactionPopup extends javax.swing.JFrame {
     private void initComponents() {
 
         Alabel = new javax.swing.JLabel();
-        a1 = new javax.swing.JTextField();
         saveP = new javax.swing.JButton();
         eqCost = new javax.swing.JLabel();
-        eq1 = new javax.swing.JTextField();
+        equipmentCostLabel = new javax.swing.JTextField();
         lcLabel = new javax.swing.JLabel();
-        lc1 = new javax.swing.JTextField();
+        laborCostLabel = new javax.swing.JTextField();
         spLabel = new javax.swing.JLabel();
-        sp1 = new javax.swing.JTextField();
+        servicePlanCostLabel = new javax.swing.JTextField();
+        appIDComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(119, 120, 119));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Alabel.setText("Appointment ID: ");
+        Alabel.setText("Appointment: ");
         getContentPane().add(Alabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 76, -1, -1));
 
-        a1.setText("jTextField1");
-        a1.addActionListener(new java.awt.event.ActionListener() {
+        saveP.setText("Save");
+        saveP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                a1ActionPerformed(evt);
+                savePActionPerformed(evt);
             }
         });
-        getContentPane().add(a1, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 73, 429, -1));
-
-        saveP.setText("Save");
         getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 317, 140, -1));
 
         eqCost.setText("Equipment Cost:");
         getContentPane().add(eqCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 130, -1, -1));
 
-        eq1.setText("jTextField1");
-        eq1.addActionListener(new java.awt.event.ActionListener() {
+        equipmentCostLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eq1ActionPerformed(evt);
+                equipmentCostLabelActionPerformed(evt);
             }
         });
-        getContentPane().add(eq1, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 127, 429, -1));
+        getContentPane().add(equipmentCostLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 127, 500, -1));
 
         lcLabel.setText("Labor Cost:");
         getContentPane().add(lcLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 194, -1, -1));
 
-        lc1.setText("jTextField1");
-        lc1.addActionListener(new java.awt.event.ActionListener() {
+        laborCostLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lc1ActionPerformed(evt);
+                laborCostLabelActionPerformed(evt);
             }
         });
-        getContentPane().add(lc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 191, 429, -1));
+        getContentPane().add(laborCostLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 191, 500, -1));
 
         spLabel.setText("Service Plan Cost:");
         getContentPane().add(spLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 262, -1, -1));
 
-        sp1.setText("jTextField1");
-        sp1.addActionListener(new java.awt.event.ActionListener() {
+        servicePlanCostLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sp1ActionPerformed(evt);
+                servicePlanCostLabelActionPerformed(evt);
             }
         });
-        getContentPane().add(sp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 259, 429, -1));
+        getContentPane().add(servicePlanCostLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 259, 500, -1));
+
+        getContentPane().add(appIDComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 500, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void eq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eq1ActionPerformed
+    private void equipmentCostLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentCostLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_eq1ActionPerformed
+    }//GEN-LAST:event_equipmentCostLabelActionPerformed
 
-    private void sp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sp1ActionPerformed
+    private void servicePlanCostLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicePlanCostLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sp1ActionPerformed
+    }//GEN-LAST:event_servicePlanCostLabelActionPerformed
 
-    private void lc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lc1ActionPerformed
+    private void laborCostLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laborCostLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lc1ActionPerformed
+    }//GEN-LAST:event_laborCostLabelActionPerformed
 
-    private void a1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_a1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_a1ActionPerformed
+    private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
+        var aID = clientIdByIndex.get(appIDComboBox.getSelectedIndex());
+        var equipCost = Integer.parseInt(equipmentCostLabel.getText());
+        var laborCost = Integer.parseInt(laborCostLabel.getText());
+        var SPCost = Integer.parseInt(servicePlanCostLabel.getText());
+        
+        insertIntoDB(aID, equipCost, laborCost, SPCost);
+        setVisible(false);
+    }//GEN-LAST:event_savePActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Alabel;
-    private javax.swing.JTextField a1;
-    private javax.swing.JTextField eq1;
+    private javax.swing.JComboBox<String> appIDComboBox;
     private javax.swing.JLabel eqCost;
-    private javax.swing.JTextField lc1;
+    private javax.swing.JTextField equipmentCostLabel;
+    private javax.swing.JTextField laborCostLabel;
     private javax.swing.JLabel lcLabel;
     private javax.swing.JButton saveP;
-    private javax.swing.JTextField sp1;
+    private javax.swing.JTextField servicePlanCostLabel;
     private javax.swing.JLabel spLabel;
     // End of variables declaration//GEN-END:variables
 }

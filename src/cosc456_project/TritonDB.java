@@ -127,12 +127,13 @@ public class TritonDB {
                 }
                 rowList.add(rowEntry);
             }
-            
-            var rows = new String[rowList.size()][rowList.get(0).length];
-            for(int i = 0; i < rowList.size(); i++){
-                rows[i] = rowList.get(i);
+            if (rowList.size() > 0){
+                var rows = new String[rowList.size()][rowList.get(0).length];
+                for(int i = 0; i < rowList.size(); i++){
+                    rows[i] = rowList.get(i);
+                }
+                return rows;   
             }
-            return rows;
         }
         catch(Exception e){
             e.printStackTrace();

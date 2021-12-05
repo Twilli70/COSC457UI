@@ -63,16 +63,23 @@ public class EmployeePopup extends javax.swing.JFrame {
         });
         getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
-
+public void insertIntoDB(String fName, String lName,String Sex,String Address){        
+        var triton = TritonDB.getInstance();
+        var empID = triton.selectMax("Employees", "empID") + 1;
+        var insert = "INSERT INTO Employees(empID,fName,lName,Sex,Address)\n";
+        insert += String.format("VALUES('%s', '%s','%s','%s','%s')", empID, fName, lName,Sex, Address);
+        System.out.print(insert);
+        triton.executeUpdate(insert);
+        
+}
     private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
         var triton = TritonDB.getInstance();
         var fName = firstNameField.getText();
         var lName = lastNameField.getText();
-        var sex = sexField.getText();
-        var address = addressField.getText();
-        var empID = triton.selectMax("Employees", "empID") + 1;
-        triton.insertStringInto("Employees", new String[]{"empID","fName", "lName", "sex", "address"}, new String[]{empID, fName, lName, sex, address});
-        //triton.executeUpdate(String.format("INSERT INTO %s(empId, fName, lName, sex, address)\n VALUES(%d, %s, %s, %s, %s)"), empID, fName, lName, sex, address));
+        var Sex = sexField.getText();
+        var Address = addressField.getText();
+        
+        insertIntoDB(fName, lName, Sex, Address);
         setVisible(false);
     }//GEN-LAST:event_savePActionPerformed
 

@@ -3,6 +3,7 @@ package cosc456_project;
 import javax.swing.*;
 import ui.DatabaseEditor;
 import ui.pages.ClientPage;
+import ui.popups.*;
 public class HomeScreen extends javax.swing.JFrame {
     /**
      * Creates new form homeScreen
@@ -17,13 +18,21 @@ public class HomeScreen extends javax.swing.JFrame {
     public HomeScreen() {
         initComponents();
         switchToPage(clientPage);
+        
         var triton = TritonDB.getInstance();
-        // Too tired, its not enough to just show the selection query
-        // All the data from the clientData must be displayed + the unique data of residential and business
-        // This is just a test
         try{
             var clientData = triton.executeQuery("SELECT * FROM Employees");
-            employeePage.initTable(triton.getResultColumns(clientData), triton.getResultRows(clientData));
+            employeePage.initTable(triton.getResultColumns(clientData), triton.getResultRows(clientData), new EmployeePopup());
+            
+            var appointmentData = triton.executeQuery("SELECT * FROM Appointment");
+            appointmentPage.initTable(triton.getResultColumns(appointmentData), triton.getResultRows(appointmentData), new AppointmentPopup());
+            
+            var manufacturerData = triton.executeQuery("SELECT * FROM Manufacturer");
+            manufacturerPage.initTable(triton.getResultColumns(manufacturerData), triton.getResultRows(manufacturerData), new ManufacturerPopup());
+            
+            var equipmentData = triton.executeQuery("SELECT * FROM Equipment");
+            equipmentPage.initTable(triton.getResultColumns(equipmentData), triton.getResultRows(equipmentData), new EquipmentPopup());
+            
         }
         catch (Exception e){
             e.printStackTrace();

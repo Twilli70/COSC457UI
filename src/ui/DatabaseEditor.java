@@ -4,6 +4,10 @@
  */
 package ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,12 +19,21 @@ public class DatabaseEditor extends javax.swing.JPanel {
     /**
      * Creates new form DatabaseView
      */
+    private JFrame addDataWindow;
+    
     public DatabaseEditor() {
         initComponents();
     }
     
-    public void initTable(String[] columnNames, Object[][] rows){
+    public void initTable(String[] columnNames, Object[][] rows, JFrame popupWindow){
         dbTable.setModel(new DefaultTableModel(rows, columnNames));
+        addDataWindow = popupWindow;
+        addButton.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            addDataWindow.setVisible(true);
+        }
+        });
     }
     
     /**
@@ -32,16 +45,12 @@ public class DatabaseEditor extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contentArea = new javax.swing.JPanel();
         TableScroll = new javax.swing.JScrollPane();
         dbTable = new javax.swing.JTable();
-        Add = new javax.swing.JButton();
-        Remove = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        contentArea.setBackground(new java.awt.Color(119, 120, 119));
-        contentArea.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dbTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -56,23 +65,20 @@ public class DatabaseEditor extends javax.swing.JPanel {
         ));
         TableScroll.setViewportView(dbTable);
 
-        contentArea.add(TableScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 640, 370));
+        add(TableScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 640, 370));
 
-        Add.setText("Add");
-        contentArea.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 80, -1));
+        addButton.setText("Add");
+        add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 80, -1));
 
-        Remove.setText("Remove");
-        contentArea.add(Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 80, -1));
-
-        add(contentArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
+        removeButton.setText("Remove");
+        add(removeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
-    private javax.swing.JButton Remove;
     private javax.swing.JScrollPane TableScroll;
-    private javax.swing.JPanel contentArea;
+    private javax.swing.JButton addButton;
     private javax.swing.JTable dbTable;
+    private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

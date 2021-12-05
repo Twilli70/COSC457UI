@@ -98,6 +98,7 @@ public class EmployeePopup extends javax.swing.JFrame {
         var address = addressField.getText();
         var empID = triton.selectMax("Employees", "empID") + 1;
         triton.insertStringInto("Employees", new String[]{"empID","fName", "lName", "sex", "address"}, new String[]{empID, fName, lName, sex, address});
+        //triton.executeUpdate(String.format("INSERT INTO %s(empId, fName, lName, sex, address)\n VALUES(%d, %s, %s, %s, %s)"), empID, fName, lName, sex, address));
         setVisible(false);
     }//GEN-LAST:event_savePActionPerformed
 

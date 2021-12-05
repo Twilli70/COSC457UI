@@ -27,24 +27,17 @@ public class ClientPopup extends javax.swing.JFrame {
     private void initComponents() {
 
         nLabel = new javax.swing.JLabel();
-        n1 = new javax.swing.JTextField();
-        n2 = new javax.swing.JTextField();
+        firstNameField = new javax.swing.JTextField();
+        lastNameField = new javax.swing.JTextField();
         aLabel = new javax.swing.JLabel();
         a1 = new javax.swing.JTextField();
-        a2 = new javax.swing.JTextField();
-        cLabel = new javax.swing.JLabel();
-        c1 = new javax.swing.JTextField();
-        sLabel = new javax.swing.JLabel();
-        s1 = new javax.swing.JTextField();
-        zLabel = new javax.swing.JLabel();
-        z1 = new javax.swing.JTextField();
         saveP = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        resCheckBox = new javax.swing.JCheckBox();
+        busCheckBox = new javax.swing.JCheckBox();
         pnLabel = new javax.swing.JLabel();
-        pn1 = new javax.swing.JTextField();
+        phoneNumberField = new javax.swing.JTextField();
         emailLabel = new javax.swing.JLabel();
-        email1 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(119, 120, 119));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,16 +45,11 @@ public class ClientPopup extends javax.swing.JFrame {
         nLabel.setText("Name:");
         getContentPane().add(nLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 67, -1, -1));
 
-        n1.setText("jTextField1");
-        n1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(n1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 64, 195, -1));
+        firstNameField.setText("jTextField1");
+        getContentPane().add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 64, 195, -1));
 
-        n2.setText("jTextField2");
-        getContentPane().add(n2, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 64, 195, -1));
+        lastNameField.setText("jTextField2");
+        getContentPane().add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 64, 195, -1));
 
         aLabel.setText("Address:");
         getContentPane().add(aLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 121, -1, -1));
@@ -69,100 +57,66 @@ public class ClientPopup extends javax.swing.JFrame {
         a1.setText("jTextField3");
         getContentPane().add(a1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 118, 494, -1));
 
-        a2.setText("jTextField7");
-        getContentPane().add(a2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 156, 494, -1));
-
-        cLabel.setText("City:");
-        getContentPane().add(cLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 224, -1, 10));
-
-        c1.setText("jTextField4");
-        getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 219, 197, -1));
-
-        sLabel.setText("State:");
-        getContentPane().add(sLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 275, -1, -1));
-
-        s1.setText("jTextField5");
-        getContentPane().add(s1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 272, 197, -1));
-
-        zLabel.setText("Zip:");
-        getContentPane().add(zLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 332, -1, -1));
-
-        z1.setText("jTextField6");
-        getContentPane().add(z1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 329, 197, -1));
-
         saveP.setText("Save");
-        getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 399, 140, -1));
-
-        jCheckBox1.setText("Residential");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 23, 96, -1));
-
-        jCheckBox2.setText("Business");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        saveP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                savePActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 23, 99, -1));
+        getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 140, -1));
+
+        resCheckBox.setText("Residential");
+        resCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resCheckBoxActionPerformed(evt);
+            }
+        });
+        getContentPane().add(resCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 23, 96, -1));
+
+        busCheckBox.setText("Business");
+        busCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busCheckBoxActionPerformed(evt);
+            }
+        });
+        getContentPane().add(busCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 23, 99, -1));
 
         pnLabel.setText("Phone Number:");
-        getContentPane().add(pnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 219, -1, 20));
+        getContentPane().add(pnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 20));
 
-        pn1.setText("jTextField1");
-        pn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pn1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(pn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 219, 194, -1));
+        phoneNumberField.setText("jTextField1");
+        getContentPane().add(phoneNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 230, -1));
 
         emailLabel.setText("Emaill:");
-        getContentPane().add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 272, -1, 20));
-
-        email1.setText("jTextField2");
-        email1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 272, 227, -1));
+        getContentPane().add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 20));
+        getContentPane().add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 227, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void n1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n1ActionPerformed
+    private void busCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_n1ActionPerformed
+    }//GEN-LAST:event_busCheckBoxActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
 
-    private void pn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pn1ActionPerformed
+    }//GEN-LAST:event_savePActionPerformed
 
-    private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
+    private void resCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_email1ActionPerformed
+    }//GEN-LAST:event_resCheckBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField a1;
-    private javax.swing.JTextField a2;
     private javax.swing.JLabel aLabel;
-    private javax.swing.JTextField c1;
-    private javax.swing.JLabel cLabel;
-    private javax.swing.JTextField email1;
+    private javax.swing.JCheckBox busCheckBox;
+    private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JTextField n1;
-    private javax.swing.JTextField n2;
+    private javax.swing.JTextField firstNameField;
+    private javax.swing.JTextField lastNameField;
     private javax.swing.JLabel nLabel;
-    private javax.swing.JTextField pn1;
+    private javax.swing.JTextField phoneNumberField;
     private javax.swing.JLabel pnLabel;
-    private javax.swing.JTextField s1;
-    private javax.swing.JLabel sLabel;
+    private javax.swing.JCheckBox resCheckBox;
     private javax.swing.JButton saveP;
-    private javax.swing.JTextField z1;
-    private javax.swing.JLabel zLabel;
     // End of variables declaration//GEN-END:variables
 }

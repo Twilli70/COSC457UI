@@ -78,6 +78,15 @@ public class TritonDB {
         }
     }
     
+    public void executeUpdate(String sql){
+        try{
+            statement.executeUpdate(sql);   
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public ResultSet executeQuery(String sql) throws SQLException {
         if (connection != null){
             return statement.executeQuery(sql);

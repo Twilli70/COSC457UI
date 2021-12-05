@@ -23,7 +23,7 @@ public class ClientPage extends javax.swing.JPanel {
         // This is just a test
         try{
             var clientData = triton.executeQuery("SELECT * FROM Client");
-            residentialDBE.initTable(triton.getResultColumns(clientData), triton.getResultRows(clientData));
+            //residentialDBE.initTable(triton.getResultColumns(clientData), triton.getResultRows(clientData));
         }
         catch (Exception e){
             e.printStackTrace();

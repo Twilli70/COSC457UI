@@ -32,7 +32,52 @@ public class TritonDB {
         }
         return instance;
     }
+    
+    public String selectMax(String table, String attribute){
+        try{
+            var result = executeQuery(String.format("SELECT MAX(%s) FROM %s", attribute, table));
+            result.next();
+            return result.getString(1);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+    }
 
+    public void insertStringInto(String table, String[] columns, String[] values){
+        try{
+            if (columns.length != values.length){
+                System.out.println("insertion amount does not match column amount");
+                return;
+            }
+            
+            var insertion = new StringBuilder();
+            insertion.append("INSERT INTO " + table + "(");
+            for(int i = 0; i < columns.length; i++){
+                insertion.append(columns[i]);
+                if (i < columns.length - 1){
+                    insertion.append(",");
+                }
+            }
+            insertion.append(")\n");
+            
+            insertion.append("VALUES(");
+            for(int i = 0; i < values.length; i++){
+                insertion.append("\"" + values[i] + "\"");
+                if (i < values.length - 1){
+                    insertion.append(",");
+                }
+            }
+            insertion.append(");");
+            System.out.println(insertion);
+            statement.executeUpdate(insertion.toString());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public ResultSet executeQuery(String sql) throws SQLException {
         if (connection != null){
             return statement.executeQuery(sql);

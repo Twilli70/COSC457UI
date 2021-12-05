@@ -87,10 +87,6 @@ public class TransactionPopup extends javax.swing.JFrame {
         getContentPane().add(sp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 259, 429, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void a1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_a1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_a1ActionPerformed
-
     private void eq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eq1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eq1ActionPerformed
@@ -102,6 +98,10 @@ public class TransactionPopup extends javax.swing.JFrame {
     private void lc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lc1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lc1ActionPerformed
+
+    private void a1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_a1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_a1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

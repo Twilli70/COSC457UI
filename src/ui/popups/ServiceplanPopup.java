@@ -36,8 +36,8 @@ public class ServiceplanPopup extends javax.swing.JFrame {
         bclabel1 = new javax.swing.JLabel();
         isAnnually = new javax.swing.JCheckBox();
         isQuarterly = new javax.swing.JCheckBox();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jDateChooser4 = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(119, 120, 119));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,8 +86,12 @@ public class ServiceplanPopup extends javax.swing.JFrame {
             }
         });
         getContentPane().add(isQuarterly, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 317, -1, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 70, 183, -1));
-        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 124, 183, -1));
+
+        jDateChooser3.setDateFormatString("yyyy-mm-dd ");
+        getContentPane().add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 120, -1));
+
+        jDateChooser4.setDateFormatString("yyyy-mm-dd");
+        getContentPane().add(jDateChooser4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 120, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void sp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sp1ActionPerformed
@@ -108,8 +112,8 @@ public class ServiceplanPopup extends javax.swing.JFrame {
     private javax.swing.JLabel edLabel;
     private javax.swing.JCheckBox isAnnually;
     private javax.swing.JCheckBox isQuarterly;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JTextField lc1;
     private javax.swing.JLabel lcLabel;
     private javax.swing.JButton saveP;

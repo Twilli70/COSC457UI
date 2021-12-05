@@ -4,6 +4,8 @@
  */
 package ui.popups;
 
+import cosc456_project.TritonDB;
+
 /**
  *
  * @author trwil
@@ -17,6 +19,15 @@ public class ManufacturerPopup extends javax.swing.JFrame {
         initComponents();
     }
 
+    private void savePActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        var triton = TritonDB.getInstance();
+        var mName = n1.getText();
+      
+        var mID = triton.selectMax("Manufacturer", "mID") + 1;
+        triton.insertStringInto("Manufacturer", new String[]{"mID","mName"}, new String[]{mID, mName});
+        
+        setVisible(false);
+    }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,20 +48,11 @@ public class ManufacturerPopup extends javax.swing.JFrame {
         getContentPane().add(nLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 192, -1, -1));
 
         n1.setText("jTextField1");
-        n1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n1ActionPerformed(evt);
-            }
-        });
         getContentPane().add(n1, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 189, 429, -1));
 
         saveP.setText("Save");
         getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 290, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void n1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_n1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

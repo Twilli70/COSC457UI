@@ -16,7 +16,7 @@ import ui.popups.*;
  *
  * @author ezeha
  */
-public class ClientPage extends javax.swing.JPanel {
+public class ClientPage extends javax.swing.JPanel implements IPage{
 
     private Hashtable<Integer,String> clientIdByIndex = new Hashtable<Integer,String>();
     
@@ -54,7 +54,7 @@ public class ClientPage extends javax.swing.JPanel {
         jTabbedPane1.addTab("Residential", residentialDBE);
         jTabbedPane1.addTab("Business", businessDBE);
 
-        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 440));
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -64,5 +64,11 @@ public class ClientPage extends javax.swing.JPanel {
     private cosc456_project.Main main1;
     private ui.DatabaseEditor residentialDBE;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void closePopups() {
+        businessDBE.closePopups();
+        residentialDBE.closePopups();
+    }
 }
 

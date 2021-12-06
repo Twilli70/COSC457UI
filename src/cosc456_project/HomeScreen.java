@@ -3,6 +3,7 @@ package cosc456_project;
 import javax.swing.*;
 import ui.DatabaseEditor;
 import ui.pages.ClientPage;
+import ui.pages.IPage;
 import ui.popups.*;
 public class HomeScreen extends javax.swing.JFrame {
     /**
@@ -15,7 +16,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private DatabaseEditor equipmentPage = new DatabaseEditor("Equipment", new String[]{"eID"});
     private DatabaseEditor transactionPage = new DatabaseEditor("Transactions", new String[]{"tID"});
     private DatabaseEditor servicePlanPage = new DatabaseEditor("Service_Plan", new String[]{"cId, sDate"});
-    private JPanel currentPage;
+    private IPage currentPage;
     
     public HomeScreen() {
         initComponents();
@@ -46,10 +47,12 @@ public class HomeScreen extends javax.swing.JFrame {
         }
     }
     
-    public void switchToPage(JPanel newPage){
+    public void switchToPage(IPage newPage){
         if(currentPage != newPage){
+            if (currentPage != null)
+                currentPage.closePopups();
             contentArea.removeAll();
-            contentArea.add(newPage);
+            contentArea.add((JPanel) newPage);
             contentArea.repaint();
             contentArea.revalidate();
             currentPage = newPage;

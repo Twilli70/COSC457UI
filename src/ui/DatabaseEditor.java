@@ -10,12 +10,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import ui.pages.IPage;
 
 /**
  *
  * @author ezeha
  */
-public class DatabaseEditor extends javax.swing.JPanel {
+public class DatabaseEditor extends javax.swing.JPanel implements IPage {
 
     /**
      * Creates new form DatabaseView
@@ -23,6 +24,10 @@ public class DatabaseEditor extends javax.swing.JPanel {
     private JFrame addDataWindow;
     private String[] primaryKeys;
     private String tableName;
+
+    public DatabaseEditor() {
+
+    }
 
     public DatabaseEditor(String tabName, String[] pK) {
         initComponents();
@@ -83,18 +88,16 @@ public class DatabaseEditor extends javax.swing.JPanel {
         var primaryKeyCount = 0;
         int selectRow = dbTable.getSelectedRow();
         for (int i = 0; i < dbTable.getColumnCount(); i++) {
-            for(var pk : primaryKeys){
+            for (var pk : primaryKeys) {
                 dbTable.getColumnName(i);
-                if(pk.equals(dbTable.getColumnName(i))){
-                     deleteStatement+= pk + "=" +  dbTable.getValueAt(selectRow, i);
-                     primaryKeyCount++;
-                     if(primaryKeyCount < primaryKeys.length){
-                         deleteStatement += " AND ";
-                     }
-                       
-                       
+                if (pk.equals(dbTable.getColumnName(i))) {
+                    deleteStatement += pk + "=" + dbTable.getValueAt(selectRow, i);
+                    primaryKeyCount++;
+                    if (primaryKeyCount < primaryKeys.length) {
+                        deleteStatement += " AND ";
+                    }
                 }
-             }
+            }
         }
         return deleteStatement;
     }
@@ -103,13 +106,11 @@ public class DatabaseEditor extends javax.swing.JPanel {
         int selectRow = dbTable.getSelectedRow();
         var triton = TritonDB.getInstance();
         try {
-           triton.executeUpdate(getDeleteStatement());  
-         
-        }
-        catch (Exception e) {
+            triton.executeUpdate(getDeleteStatement());
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-       
     }//GEN-LAST:event_removeButtonActionPerformed
 
 
@@ -119,4 +120,9 @@ public class DatabaseEditor extends javax.swing.JPanel {
     private javax.swing.JTable dbTable;
     private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void closePopups() {
+        addDataWindow.setVisible(false);
+    }
 }

@@ -140,7 +140,7 @@ public class ClientPopup extends javax.swing.JFrame {
         }
         else if (clientType == 1) {
             insertIntoBDB(cID, fName);
-            insertIntoClientTypeDB(cID, (boolean) false);
+            insertIntoClientTypeDB(cID,  false);
         }
         
         setVisible(false);

@@ -139,18 +139,26 @@ public class AppointmentPopup extends javax.swing.JFrame {
         getContentPane().add(employeeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 490, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
-        /*
+    public void insertToDB(String cID, String empID, String sDate, String eDate, String aLocation, int estimate){
         var triton = TritonDB.getInstance();
-        var c_ID = "00001";
-        var empID = "7783349";
-        var eID = "55666";
-        var aLocation = addressField.getText();
-        var estimate = Integer.getInteger(estimateField.getText());
+        var aID = triton.selectMax("Appointment", "aID") + 1;
+        var insert = "INSERT INTO Appointment(aID, c_ID, empID, sDate, eDate, aLocation, estimate)\n";
+        insert += String.format("VALUES('%s', '%s', '%s', '%s', '%s', '%d')", aID, empID, sDate, eDate, aLocation, estimate);
+        triton.executeUpdate(insert);
+    }
+    
+    private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
+        var cID = clientIdByIndex.get(clientComboBox.getSelectedIndex());
+        var empID = employeeIdByIndex.get(employeeComboBox.getSelectedIndex());
         var sDate = startDateChooser.getDate();
         var eDate = endDateChooser.getDate();
-        var aID = triton.selectMax("Appointment", "aID") + 1;*/
-        //setVisible(false);
+        var aLocation = addressField.getText();
+        var sDateString = String.format("%d-%d-%d", sDate.getYear() + 1900, sDate.getMonth(), sDate.getDay());
+        var eDateString = String.format("%d-%d-%d", eDate.getYear() + 1900, eDate.getMonth(), eDate.getDay());
+        
+        var estimate = Integer.parseInt(estimateField.getText());
+        insertToDB(cID, empID, sDateString, eDateString, aLocation, estimate);
+        setVisible(false);
     }//GEN-LAST:event_savePActionPerformed
 
 

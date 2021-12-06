@@ -68,6 +68,7 @@ public class EquipmentPopup extends javax.swing.JFrame {
         manIDComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(119, 120, 119));
+        setBounds(new java.awt.Rectangle(0, 0, 600, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mLabel.setText("Manufacturer:");

@@ -6,7 +6,7 @@
       <Color blue="77" green="78" red="77" type="rgb"/>
     </Property>
     <Property name="bounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
-      <Rectangle value="[0, 0, 600, 500]"/>
+      <Rectangle value="[0, 0, 700, 600]"/>
     </Property>
   </Properties>
   <SyntheticProperties>

@@ -18,6 +18,13 @@ public class ManufacturerPopup extends Popup {
     public ManufacturerPopup() {
         initComponents();
     }
+        @Override
+        public void setVisible(boolean visible){
+            super.setVisible(visible);
+            if(!visible)
+               manTextField.setText("");     
+        }
+    
 public void insertIntoDB(String mName){        
         var triton = TritonDB.getInstance();
         var mID = triton.selectMax("Manufacturer", "mID") + 1;
@@ -42,8 +49,6 @@ public void insertIntoDB(String mName){
 
         nLabel.setText("Name:");
         getContentPane().add(nLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 192, -1, -1));
-
-        manTextField.setText("jTextField1");
         getContentPane().add(manTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 189, 429, -1));
 
         saveP.setText("Save");

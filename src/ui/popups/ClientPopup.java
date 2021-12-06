@@ -15,7 +15,18 @@ public class ClientPopup extends Popup {
     public ClientPopup() {
         initComponents();
     }
-
+  @Override
+    public void setVisible(boolean visible){
+        super.setVisible(visible);
+        if (!visible){
+            addressTextField.setText("");
+            firstNameField.setText("");
+            lastNameField.setText("");
+            emailField.setText("");
+            phoneNumberField.setText("");
+        }
+          
+    }
     public void insertIntoDB(String phone_number, String cAddr, String cEmail) {
         var triton = TritonDB.getInstance();
         var cID = triton.selectMax("Client", "cID") + 1;
@@ -77,17 +88,11 @@ public class ClientPopup extends Popup {
 
         nLabel.setText("Client Type:");
         getContentPane().add(nLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        firstNameField.setText("jTextField1");
         getContentPane().add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 64, 195, -1));
-
-        lastNameField.setText("jTextField2");
         getContentPane().add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 64, 195, -1));
 
         aLabel.setText("Address:");
         getContentPane().add(aLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 121, -1, -1));
-
-        addressTextField.setText("jTextField3");
         getContentPane().add(addressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 118, 494, -1));
 
         saveP.setText("Save");
@@ -100,8 +105,6 @@ public class ClientPopup extends Popup {
 
         pnLabel.setText("Phone Number:");
         getContentPane().add(pnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 20));
-
-        phoneNumberField.setText("jTextField1");
         getContentPane().add(phoneNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 230, -1));
 
         emailLabel.setText("Emaill:");

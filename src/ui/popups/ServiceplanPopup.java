@@ -22,10 +22,11 @@ public class ServiceplanPopup extends Popup {
         initComponents();
     }
     
+    @Override
     public void setVisible(boolean visible){
         super.setVisible(visible);
-        if (visible)
-            updateClientComboBox();
+        if (!visible)
+         servicePlanCostField.setText("");
     }
     
     public void insertToDB(String cID, String sDateString, String eDateString, int price, String billCycle) {

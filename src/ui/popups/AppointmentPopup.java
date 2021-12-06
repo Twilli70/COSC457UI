@@ -24,13 +24,15 @@ public class AppointmentPopup extends Popup {
         initComponents();
     }
     
-     @Override
+  @Override
     public void setVisible(boolean visible){
         super.setVisible(visible);
-        if (visible)
-            updateClientComboBox();
+        if (!visible){
+            addressField.setText("");
+            estimateField.setText(""); 
+        }
+          
     }
-    
     public void updateClientComboBox(){
         clientComboBox.removeAll();
         clientIdByIndex.clear();

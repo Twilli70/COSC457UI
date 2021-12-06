@@ -26,8 +26,12 @@ public class TransactionPopup extends Popup {
     @Override
     public void setVisible(boolean visible){
         super.setVisible(visible);
-        if (visible)
-            updateAppointmentComboBox();
+        if (!visible){
+            equipmentCostLabel.setText("");
+            laborCostLabel.setText("");
+            servicePlanCostLabel.setText("");
+        }
+          
     }
     
     public void updateAppointmentComboBox(){

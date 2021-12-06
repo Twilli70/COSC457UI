@@ -18,11 +18,16 @@ public class EquipmentPopup extends Popup {
     }
 
   
-      @Override
+   @Override
     public void setVisible(boolean visible){
         super.setVisible(visible);
-        if (visible)
-            updateManufacturerComboBox();
+        if (!visible){
+            equipmentCostField.setText("");
+            equipmentNameField.setText("");
+            equipmentTypeField.setText("");
+            inventoryField.setText("");
+        }
+          
     }
     
     public void updateManufacturerComboBox(){
@@ -72,28 +77,20 @@ public class EquipmentPopup extends Popup {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mLabel.setText("Manufacturer:");
-        getContentPane().add(mLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        equipmentNameField.setText("jTextField1");
-        getContentPane().add(equipmentNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 430, -1));
+        getContentPane().add(mLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        getContentPane().add(equipmentNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 430, -1));
 
         eqCost.setText("Equipment Cost:");
-        getContentPane().add(eqCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-
-        equipmentCostField.setText("jTextField3");
-        getContentPane().add(equipmentCostField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 430, -1));
+        getContentPane().add(eqCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        getContentPane().add(equipmentCostField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 270, -1));
 
         eqType.setText("Equipment Type:");
-        getContentPane().add(eqType, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, 10));
-
-        equipmentTypeField.setText("jTextField4");
-        getContentPane().add(equipmentTypeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 430, -1));
+        getContentPane().add(eqType, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, 20));
+        getContentPane().add(equipmentTypeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 270, -1));
 
         invLabel.setText("Inventory:");
-        getContentPane().add(invLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
-
-        inventoryField.setText("jTextField5");
-        getContentPane().add(inventoryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 440, -1));
+        getContentPane().add(invLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, 20));
+        getContentPane().add(inventoryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 80, -1));
 
         saveP.setText("Save");
         saveP.addActionListener(new java.awt.event.ActionListener() {
@@ -104,9 +101,9 @@ public class EquipmentPopup extends Popup {
         getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 430, 140, -1));
 
         eqLabel1.setText("Equipment Name:");
-        getContentPane().add(eqLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        getContentPane().add(eqLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
-        getContentPane().add(manIDComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 430, -1));
+        getContentPane().add(manIDComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 430, -1));
     }// </editor-fold>//GEN-END:initComponents
    public void insertIntoDB(String mID, String eName, int eCost, String eType, int eStock){        
         var triton = TritonDB.getInstance();

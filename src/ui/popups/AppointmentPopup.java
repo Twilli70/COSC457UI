@@ -27,7 +27,10 @@ public class AppointmentPopup extends Popup {
   @Override
     public void setVisible(boolean visible){
         super.setVisible(visible);
-        if (!visible){
+        if (visible){
+            updateClientComboBox();
+        }
+        else if (visible){
             addressField.setText("");
             estimateField.setText(""); 
         }

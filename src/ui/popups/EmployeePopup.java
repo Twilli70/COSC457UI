@@ -109,7 +109,6 @@ public class EmployeePopup extends Popup {
         var empID = Integer.parseInt(triton.selectMax("Employees", "empID")) + 1;
         var insert = "INSERT INTO Employees(empID,fName,lName,Sex,Address)\n";
         insert += String.format("VALUES('%d', '%s','%s','%s','%s')", empID, fName, lName, Sex, Address);
-        System.out.print(insert);
         triton.executeUpdate(insert);
     }
 

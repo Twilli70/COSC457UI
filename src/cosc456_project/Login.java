@@ -51,7 +51,7 @@ public class Login extends javax.swing.JPanel {
         userNameField1.setText("Account Login");
 
         loginBtn.setBackground(new java.awt.Color(250, 250, 250));
-        loginBtn.setText("LOGIN");
+        loginBtn.setText("LOG IN");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginBtnActionPerformed(evt);

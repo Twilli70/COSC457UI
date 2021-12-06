@@ -4,6 +4,9 @@
  */
 package ui.popups;
 
+import cosc456_project.TritonDB;
+import java.util.Hashtable;
+
 /**
  *
  * @author trwil
@@ -13,8 +16,61 @@ public class ServiceplanPopup extends javax.swing.JFrame {
     /**
      * Creates new form cPop
      */
+    private Hashtable<Integer, String> clientIdByIndex = new Hashtable<Integer, String>();
+    
     public ServiceplanPopup() {
         initComponents();
+    }
+    
+    public void setVisible(boolean visible){
+        super.setVisible(visible);
+        if (visible)
+            updateClientComboBox();
+    }
+    
+    public void insertToDB(String cID, String sDateString, String eDateString, int price, String billCycle) {
+        var triton = TritonDB.getInstance();
+        var insert = "INSERT INTO Service_Plan(cID, sDate, eDate, price, billCycle)";
+        insert += String.format("VALUES('%s', '%s', '%s', %d, '%s')", cID, sDateString, eDateString, price, billCycle);
+        System.out.println(insert);
+    }
+    
+    public void updateClientComboBox(){
+        clientComboBox.removeAll();
+        clientIdByIndex.clear();
+        var triton = TritonDB.getInstance();
+        try{
+           var result = triton.executeQuery("SELECT cID FROM Client");
+           var clientIDs = triton.getResultRows(result);
+           var index = 0;
+           for(var row : clientIDs){
+               var cID = row[0];
+               var idType = triton.getResultRows(triton.executeQuery("SELECT is_Res, is_Bus FROM Client_Type WHERE cID = " + cID));
+               var isResidential = idType[0][0].equals("1");
+               var isBusiness = idType[0][1].equals("1");
+               var clientName = "";
+               
+               if (isResidential){
+                   var resNameRows = triton.getResultRows(triton.executeQuery("SELECT fName, lName FROM Residential WHERE cID = " + cID));
+                   var firstName = resNameRows[0][0];
+                   var lastName = resNameRows[0][1];
+                   clientName = firstName + " " + lastName;
+               }
+               else if (isBusiness){
+                   var resNameRows = triton.getResultRows(triton.executeQuery("SELECT bName FROM Business WHERE cID = " + cID));
+                   var bName = resNameRows[0][0] + " (business)";
+                   clientName = bName;
+               }
+               if (!clientName.isEmpty()){
+                   clientComboBox.addItem(clientName);
+                   clientIdByIndex.put(index, cID);
+                   index++;
+               }
+           }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -29,96 +85,89 @@ public class ServiceplanPopup extends javax.swing.JFrame {
         sdlabel = new javax.swing.JLabel();
         saveP = new javax.swing.JButton();
         edLabel = new javax.swing.JLabel();
-        lcLabel = new javax.swing.JLabel();
-        lc1 = new javax.swing.JTextField();
         spLabel = new javax.swing.JLabel();
-        sp1 = new javax.swing.JTextField();
+        servicePlanCostField = new javax.swing.JTextField();
         bclabel1 = new javax.swing.JLabel();
-        isAnnually = new javax.swing.JCheckBox();
-        isQuarterly = new javax.swing.JCheckBox();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jDateChooser4 = new com.toedter.calendar.JDateChooser();
+        startDateChooser = new com.toedter.calendar.JDateChooser();
+        endDateChooser = new com.toedter.calendar.JDateChooser();
+        sdlabel1 = new javax.swing.JLabel();
+        clientComboBox = new javax.swing.JComboBox<>();
+        billCycleComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(119, 120, 119));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sdlabel.setText("Start Date:");
-        getContentPane().add(sdlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 76, -1, -1));
+        sdlabel.setText("Client:");
+        getContentPane().add(sdlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         saveP.setText("Save");
-        getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 405, 140, -1));
+        saveP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savePActionPerformed(evt);
+            }
+        });
+        getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, 140, -1));
 
         edLabel.setText("End Date:");
         getContentPane().add(edLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 130, -1, -1));
 
-        lcLabel.setText("Labor Cost:");
-        getContentPane().add(lcLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 194, -1, -1));
-
-        lc1.setText("jTextField1");
-        lc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lc1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(lc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 191, 429, -1));
-
         spLabel.setText("Service Plan Cost:");
-        getContentPane().add(spLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 262, -1, -1));
+        getContentPane().add(spLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
-        sp1.setText("jTextField1");
-        sp1.addActionListener(new java.awt.event.ActionListener() {
+        servicePlanCostField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sp1ActionPerformed(evt);
+                servicePlanCostFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(sp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 259, 429, -1));
+        getContentPane().add(servicePlanCostField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 429, -1));
 
         bclabel1.setText("Bill Cycle:");
-        getContentPane().add(bclabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 321, -1, -1));
+        getContentPane().add(bclabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
-        isAnnually.setText("Annually");
-        getContentPane().add(isAnnually, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 317, -1, -1));
+        startDateChooser.setDateFormatString("yyyy-mm-dd ");
+        getContentPane().add(startDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 120, -1));
 
-        isQuarterly.setText("Quarterly");
-        isQuarterly.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                isQuarterlyActionPerformed(evt);
-            }
-        });
-        getContentPane().add(isQuarterly, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 317, -1, -1));
+        endDateChooser.setDateFormatString("yyyy-mm-dd");
+        getContentPane().add(endDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 120, -1));
 
-        jDateChooser3.setDateFormatString("yyyy-mm-dd ");
-        getContentPane().add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 120, -1));
+        sdlabel1.setText("Start Date:");
+        getContentPane().add(sdlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 76, -1, -1));
 
-        jDateChooser4.setDateFormatString("yyyy-mm-dd");
-        getContentPane().add(jDateChooser4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 120, -1));
+        getContentPane().add(clientComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 220, -1));
+
+        billCycleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anually", "Quarterly" }));
+        getContentPane().add(billCycleComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 280, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sp1ActionPerformed
+    private void servicePlanCostFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicePlanCostFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sp1ActionPerformed
+    }//GEN-LAST:event_servicePlanCostFieldActionPerformed
 
-    private void lc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lc1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lc1ActionPerformed
-
-    private void isQuarterlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isQuarterlyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_isQuarterlyActionPerformed
+    private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
+        var cID = clientIdByIndex.get(clientComboBox.getSelectedIndex());
+        var sDate = startDateChooser.getDate();
+        var eDate = endDateChooser.getDate();
+        var price = Integer.parseInt(servicePlanCostField.getText());
+        var billCycle = (String) billCycleComboBox.getSelectedItem();
+        var sDateString = String.format("%d-%d-%d", sDate.getYear() + 1900, sDate.getMonth(), sDate.getDay());
+        var eDateString = String.format("%d-%d-%d", eDate.getYear() + 1900, eDate.getMonth(), eDate.getDay());
+        
+        insertToDB(cID, sDateString, eDateString, price, billCycle);
+    }//GEN-LAST:event_savePActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bclabel1;
+    private javax.swing.JComboBox<String> billCycleComboBox;
+    private javax.swing.JComboBox<String> clientComboBox;
     private javax.swing.JLabel edLabel;
-    private javax.swing.JCheckBox isAnnually;
-    private javax.swing.JCheckBox isQuarterly;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
-    private com.toedter.calendar.JDateChooser jDateChooser4;
-    private javax.swing.JTextField lc1;
-    private javax.swing.JLabel lcLabel;
+    private com.toedter.calendar.JDateChooser endDateChooser;
     private javax.swing.JButton saveP;
     private javax.swing.JLabel sdlabel;
-    private javax.swing.JTextField sp1;
+    private javax.swing.JLabel sdlabel1;
+    private javax.swing.JTextField servicePlanCostField;
     private javax.swing.JLabel spLabel;
+    private com.toedter.calendar.JDateChooser startDateChooser;
     // End of variables declaration//GEN-END:variables
+
 }

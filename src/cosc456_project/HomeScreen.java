@@ -22,8 +22,8 @@ public class HomeScreen extends javax.swing.JFrame {
         
         var triton = TritonDB.getInstance();
         try{
-            var clientData = triton.executeQuery("SELECT * FROM Employees");
-            employeePage.initTable(triton.getResultColumns(clientData), triton.getResultRows(clientData), new EmployeePopup());
+            var employeeData = triton.executeQuery("SELECT * FROM Employees");
+            employeePage.initTable(triton.getResultColumns(employeeData), triton.getResultRows(employeeData), new EmployeePopup());
             
             var appointmentData = triton.executeQuery("SELECT * FROM Appointment");
             appointmentPage.initTable(triton.getResultColumns(appointmentData), triton.getResultRows(appointmentData), new AppointmentPopup());

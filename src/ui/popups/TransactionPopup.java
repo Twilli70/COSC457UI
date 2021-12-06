@@ -96,6 +96,7 @@ public class TransactionPopup extends javax.swing.JFrame {
         appIDComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(119, 120, 119));
+        setBounds(new java.awt.Rectangle(0, 0, 200, 200));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Alabel.setText("Appointment: ");

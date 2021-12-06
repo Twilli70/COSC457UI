@@ -50,7 +50,7 @@ public class Login extends javax.swing.JPanel {
         userNameField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         userNameField1.setText("Account Login");
 
-        loginBtn.setBackground(new java.awt.Color(0, 0, 0));
+        loginBtn.setBackground(new java.awt.Color(250, 250, 250));
         loginBtn.setText("LOGIN");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

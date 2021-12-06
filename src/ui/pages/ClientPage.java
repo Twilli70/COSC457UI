@@ -27,13 +27,8 @@ public class ClientPage extends javax.swing.JPanel implements IPage{
          var triton = TritonDB.getInstance();
       
         try{
-             var clientRData = triton.executeQuery("SELECT r.cID, fName, lName\nFROM Residential r, Client_Type c\n WHERE r.cID = c.cID AND c.is_Res = 1"); 
-             residentialDBE.initTable(triton.getResultColumns(clientRData), triton.getResultRows(clientRData),new ClientPopup());
-                            
-             var clientBData = triton.executeQuery("SELECT b.cID, bName\nFROM Business b, Client_Type c\n WHERE b.cID = c.cID AND c.is_Bus =1");
-             businessDBE.initTable(triton.getResultColumns(clientBData), triton.getResultRows(clientBData),new ClientPopup());
-               
-           
+             residentialDBE.initTable(new ClientPopup(), "SELECT r.cID, fName, lName\nFROM Residential r, Client_Type c\n WHERE r.cID = c.cID AND c.is_Res = 1");
+             businessDBE.initTable(new ClientPopup(), "SELECT b.cID, bName\nFROM Business b, Client_Type c\n WHERE b.cID = c.cID AND c.is_Bus =1");
         }
         catch (Exception e){
             e.printStackTrace();

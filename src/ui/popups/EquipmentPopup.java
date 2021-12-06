@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 
-public class EquipmentPopup extends javax.swing.JFrame {
+public class EquipmentPopup extends Popup {
 
     private Hashtable<Integer,String> manIdByIndex = new Hashtable<Integer,String>();
 
@@ -126,6 +126,7 @@ public class EquipmentPopup extends javax.swing.JFrame {
         insertIntoDB(mID,eName,eCost, eType, eStock);
        
         setVisible(false);
+        save();
     }//GEN-LAST:event_savePActionPerformed
 
 

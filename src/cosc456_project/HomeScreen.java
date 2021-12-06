@@ -5,7 +5,9 @@ import ui.DatabaseEditor;
 import ui.pages.ClientPage;
 import ui.pages.IPage;
 import ui.popups.*;
+
 public class HomeScreen extends javax.swing.JFrame {
+
     /**
      * Creates new form homeScreen
      */
@@ -17,40 +19,29 @@ public class HomeScreen extends javax.swing.JFrame {
     private DatabaseEditor transactionPage = new DatabaseEditor("Transactions", new String[]{"tID"});
     private DatabaseEditor servicePlanPage = new DatabaseEditor("Service_Plan", new String[]{"cId, sDate"});
     private IPage currentPage;
-    
+
     public HomeScreen() {
         initComponents();
         switchToPage(clientPage);
-        
+
         var triton = TritonDB.getInstance();
-        try{
-            var employeeData = triton.executeQuery("SELECT * FROM Employees");
-            employeePage.initTable(triton.getResultColumns(employeeData), triton.getResultRows(employeeData), new EmployeePopup());
-            
-            var appointmentData = triton.executeQuery("SELECT * FROM Appointment");
-            appointmentPage.initTable(triton.getResultColumns(appointmentData), triton.getResultRows(appointmentData), new AppointmentPopup());
-            
-            var manufacturerData = triton.executeQuery("SELECT * FROM Manufacturer");
-            manufacturerPage.initTable(triton.getResultColumns(manufacturerData), triton.getResultRows(manufacturerData), new ManufacturerPopup());
-            
-            var equipmentData = triton.executeQuery("SELECT * FROM Equipment");
-            equipmentPage.initTable(triton.getResultColumns(equipmentData), triton.getResultRows(equipmentData), new EquipmentPopup());
-            
-            var transactionData = triton.executeQuery("SELECT * FROM Transactions");
-            transactionPage.initTable(triton.getResultColumns(transactionData), triton.getResultRows(transactionData), new TransactionPopup());
-            
-            var servicePlanData = triton.executeQuery("SELECT * FROM Service_Plan");
-            servicePlanPage.initTable(triton.getResultColumns(servicePlanData), triton.getResultRows(servicePlanData), new ServiceplanPopup());
-        }
-        catch (Exception e){
+        try {
+            employeePage.initTable(new EmployeePopup(), "SELECT * FROM Employees");
+            appointmentPage.initTable(new AppointmentPopup(), "SELECT * FROM Appointment");
+            manufacturerPage.initTable(new ManufacturerPopup(), "SELECT * FROM Manufacturer");
+            equipmentPage.initTable(new EquipmentPopup(), "SELECT * FROM Equipment");
+            transactionPage.initTable(new TransactionPopup(), "SELECT * FROM Transactions");
+            servicePlanPage.initTable(new ServiceplanPopup(), "SELECT * FROM Service_Plan");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void switchToPage(IPage newPage){
-        if(currentPage != newPage){
-            if (currentPage != null)
+
+    public void switchToPage(IPage newPage) {
+        if (currentPage != newPage) {
+            if (currentPage != null) {
                 currentPage.closePopups();
+            }
             contentArea.removeAll();
             contentArea.add((JPanel) newPage);
             contentArea.repaint();
@@ -58,7 +49,6 @@ public class HomeScreen extends javax.swing.JFrame {
             currentPage = newPage;
         }
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -231,7 +221,7 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_transactionBtnActionPerformed
 
     private void servicePlanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicePlanBtnActionPerformed
-     switchToPage(servicePlanPage);
+        switchToPage(servicePlanPage);
     }//GEN-LAST:event_servicePlanBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

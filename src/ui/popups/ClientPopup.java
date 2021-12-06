@@ -8,7 +8,7 @@ import cosc456_project.TritonDB;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class ClientPopup extends javax.swing.JFrame {
+public class ClientPopup extends Popup {
 
     private Hashtable<Integer, String> clientIdByIndex = new Hashtable<Integer, String>();
 
@@ -145,6 +145,7 @@ public class ClientPopup extends javax.swing.JFrame {
         }
         
         setVisible(false);
+        save();
     }//GEN-LAST:event_savePActionPerformed
 
     private void clientTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientTypeComboBoxActionPerformed

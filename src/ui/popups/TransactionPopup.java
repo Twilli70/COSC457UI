@@ -12,7 +12,7 @@ import java.util.Hashtable;
  *
  * @author trwil
  */
-public class TransactionPopup extends javax.swing.JFrame {
+public class TransactionPopup extends Popup {
 
     /**
      * Creates new form cPop
@@ -133,6 +133,7 @@ public class TransactionPopup extends javax.swing.JFrame {
         
         insertIntoDB(aID, equipCost, laborCost, SPCost);
         setVisible(false);
+        save();
     }//GEN-LAST:event_savePActionPerformed
 
 

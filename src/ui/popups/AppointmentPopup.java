@@ -12,7 +12,7 @@ import java.util.Hashtable;
  *
  * @author trwil
  */
-public class AppointmentPopup extends javax.swing.JFrame {
+public class AppointmentPopup extends Popup {
 
     /**
      * Creates new form cPop
@@ -160,6 +160,7 @@ public class AppointmentPopup extends javax.swing.JFrame {
         var estimate = Integer.parseInt(estimateField.getText());
         insertToDB(cID, empID, sDateString, eDateString, aLocation, estimate);
         setVisible(false);
+        save();
     }//GEN-LAST:event_savePActionPerformed
 
 

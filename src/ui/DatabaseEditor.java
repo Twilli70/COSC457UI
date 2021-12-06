@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import ui.pages.IPage;
+import ui.popups.Popup;
 
 /**
  *
@@ -21,9 +22,10 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
     /**
      * Creates new form DatabaseView
      */
-    private JFrame addDataWindow;
+    private Popup addDataWindow;
     private String[] primaryKeys;
     private String tableName;
+    private String populationStatement;
 
     public DatabaseEditor() {
 
@@ -35,15 +37,30 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         tableName = tabName;
     }
 
-    public void initTable(String[] columnNames, Object[][] rows, JFrame popupWindow) {
-        dbTable.setModel(new DefaultTableModel(rows, columnNames));
+    public void updateTable() {
+        var triton = TritonDB.getInstance();
+        try {
+            var result = triton.executeQuery(populationStatement);
+            var rows = triton.getResultRows(result);
+            var columnNames = triton.getResultColumns(result);
+            
+            dbTable.setModel(new DefaultTableModel(rows, columnNames));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initTable(Popup popupWindow, String popStatement) {
+        populationStatement = popStatement;
         addDataWindow = popupWindow;
+        addDataWindow.addDatabaseEditor(this);
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 addDataWindow.setVisible(true);
             }
         });
+        updateTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -111,6 +128,7 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        updateTable();
     }//GEN-LAST:event_removeButtonActionPerformed
 
 

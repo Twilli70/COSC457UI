@@ -10,7 +10,7 @@ import cosc456_project.TritonDB;
  *
  * @author trwil
  */
-public class ManufacturerPopup extends javax.swing.JFrame {
+public class ManufacturerPopup extends Popup {
 
     /**
      * Creates new form cPop
@@ -61,6 +61,7 @@ public void insertIntoDB(String mName){
       
         insertIntoDB(mName);
         setVisible(false);
+        save();
     }//GEN-LAST:event_savePActionPerformed
 
 

@@ -11,7 +11,7 @@ import java.util.Hashtable;
  *
  * @author trwil
  */
-public class ServiceplanPopup extends javax.swing.JFrame {
+public class ServiceplanPopup extends Popup {
 
     /**
      * Creates new form cPop
@@ -153,6 +153,8 @@ public class ServiceplanPopup extends javax.swing.JFrame {
         var eDateString = String.format("%d-%d-%d", eDate.getYear() + 1900, eDate.getMonth(), eDate.getDay());
         
         insertToDB(cID, sDateString, eDateString, price, billCycle);
+        setVisible(false);
+        save();
     }//GEN-LAST:event_savePActionPerformed
 
 

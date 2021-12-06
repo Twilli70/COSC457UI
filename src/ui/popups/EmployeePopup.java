@@ -10,7 +10,7 @@ import cosc456_project.TritonDB;
  *
  * @author trwil
  */
-public class EmployeePopup extends javax.swing.JFrame {
+public class EmployeePopup extends Popup {
 
     /**
      * Creates new form cPop
@@ -66,9 +66,9 @@ public class EmployeePopup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 public void insertIntoDB(String fName, String lName,String Sex,String Address){        
         var triton = TritonDB.getInstance();
-        var empID = triton.selectMax("Employees", "empID") + 1;
+        var empID = Integer.parseInt(triton.selectMax("Employees", "empID")) + 1;
         var insert = "INSERT INTO Employees(empID,fName,lName,Sex,Address)\n";
-        insert += String.format("VALUES('%s', '%s','%s','%s','%s')", empID, fName, lName,Sex, Address);
+        insert += String.format("VALUES('%d', '%s','%s','%s','%s')", empID, fName, lName,Sex, Address);
         System.out.print(insert);
         triton.executeUpdate(insert);
         
@@ -82,6 +82,7 @@ public void insertIntoDB(String fName, String lName,String Sex,String Address){
         
         insertIntoDB(fName, lName, Sex, Address);
         setVisible(false);
+        save();
     }//GEN-LAST:event_savePActionPerformed
 
 

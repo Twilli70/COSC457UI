@@ -46,8 +46,8 @@ public class ClientPage extends javax.swing.JPanel {
 
         main1 = new cosc456_project.Main();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        residentialDBE = new ui.DatabaseEditor();
-        businessDBE = new ui.DatabaseEditor();
+        residentialDBE = new ui.DatabaseEditor("Residential", new String[]{"cID"});
+        businessDBE = new ui.DatabaseEditor("Business", new String[]{"cID"});
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

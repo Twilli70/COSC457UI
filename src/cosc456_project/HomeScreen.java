@@ -14,6 +14,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private DatabaseEditor manufacturerPage = new DatabaseEditor("Manufacturer", new String[]{"mID"});
     private DatabaseEditor equipmentPage = new DatabaseEditor("Equipment", new String[]{"eID"});
     private DatabaseEditor transactionPage = new DatabaseEditor("Transactions", new String[]{"tID"});
+    private DatabaseEditor servicePlanPage = new DatabaseEditor("Service_Plan", new String[]{"cId, sDate"});
     private JPanel currentPage;
     
     public HomeScreen() {
@@ -36,6 +37,9 @@ public class HomeScreen extends javax.swing.JFrame {
             
             var transactionData = triton.executeQuery("SELECT * FROM Transactions");
             transactionPage.initTable(triton.getResultColumns(transactionData), triton.getResultRows(transactionData), new TransactionPopup());
+            
+            var servicePlanData = triton.executeQuery("SELECT * FROM Service_Plan");
+            servicePlanPage.initTable(triton.getResultColumns(servicePlanData), triton.getResultRows(servicePlanData), new ServiceplanPopup());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -65,6 +69,7 @@ public class HomeScreen extends javax.swing.JFrame {
         manufacturerBtn = new javax.swing.JButton();
         equipmentBtn = new javax.swing.JButton();
         transactionBtn = new javax.swing.JButton();
+        servicePlanBtn = new javax.swing.JButton();
         contentArea = new javax.swing.JPanel();
         tPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -118,6 +123,16 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
 
+        servicePlanBtn.setText("Service Plan");
+        servicePlanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                servicePlanBtnActionPerformed(evt);
+            }
+        });
+
+        contentArea.setBackground(new java.awt.Color(119, 120, 119));
+        contentArea.setLayout(new javax.swing.BoxLayout(contentArea, javax.swing.BoxLayout.LINE_AXIS));
+
         javax.swing.GroupLayout btnPanelLayout = new javax.swing.GroupLayout(btnPanel);
         btnPanel.setLayout(btnPanelLayout);
         btnPanelLayout.setHorizontalGroup(
@@ -125,37 +140,41 @@ public class HomeScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(servicePlanBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(transactionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clientBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manufacturerBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(equipmentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(appointmentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(19, 19, 19))
+                .addGap(18, 18, 18)
+                .addComponent(contentArea, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         btnPanelLayout.setVerticalGroup(
             btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnPanelLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(37, 37, 37)
                 .addComponent(clientBtn)
-                .addGap(51, 51, 51)
+                .addGap(37, 37, 37)
                 .addComponent(employeeBtn)
-                .addGap(47, 47, 47)
+                .addGap(41, 41, 41)
                 .addComponent(appointmentBtn)
-                .addGap(64, 64, 64)
-                .addComponent(manufacturerBtn)
-                .addGap(57, 57, 57)
+                .addGap(35, 35, 35)
                 .addComponent(equipmentBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(manufacturerBtn)
+                .addGap(41, 41, 41)
                 .addComponent(transactionBtn)
-                .addGap(27, 27, 27))
+                .addGap(40, 40, 40)
+                .addComponent(servicePlanBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(contentArea, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jSplitPane2.setLeftComponent(btnPanel);
-
-        contentArea.setBackground(new java.awt.Color(119, 120, 119));
-        contentArea.setLayout(new javax.swing.BoxLayout(contentArea, javax.swing.BoxLayout.LINE_AXIS));
-        jSplitPane2.setRightComponent(contentArea);
 
         getContentPane().add(jSplitPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 900, 490));
 
@@ -208,6 +227,10 @@ public class HomeScreen extends javax.swing.JFrame {
         switchToPage(transactionPage);
     }//GEN-LAST:event_transactionBtnActionPerformed
 
+    private void servicePlanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicePlanBtnActionPerformed
+     switchToPage(servicePlanPage);
+    }//GEN-LAST:event_servicePlanBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointmentBtn;
     private javax.swing.JPanel btnPanel;
@@ -218,6 +241,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JButton manufacturerBtn;
+    private javax.swing.JButton servicePlanBtn;
     private javax.swing.JPanel tPanel;
     private javax.swing.JButton transactionBtn;
     // End of variables declaration//GEN-END:variables

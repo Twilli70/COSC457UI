@@ -98,6 +98,7 @@ public class AppointmentPopup extends javax.swing.JFrame {
         employeeComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(119, 120, 119));
+        setBounds(new java.awt.Rectangle(0, 0, 700, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nLabel.setText("Client:");

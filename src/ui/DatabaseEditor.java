@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import ui.pages.IPage;
 import ui.popups.Popup;
@@ -43,7 +44,7 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
             var result = triton.executeQuery(populationStatement);
             var rows = triton.getResultRows(result);
             var columnNames = triton.getResultColumns(result);
-            
+
             dbTable.setModel(new DefaultTableModel(rows, columnNames));
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,6 +59,17 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 addDataWindow.setVisible(true);
+                addDataWindow.isEditMode = false;
+            }
+        });
+
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (dbTable.getSelectedRow() != -1) {
+                    addDataWindow.setVisible(true);
+                    addDataWindow.isEditMode = true;
+                }
             }
         });
         updateTable();
@@ -69,8 +81,9 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
 
         TableScroll = new javax.swing.JScrollPane();
         dbTable = new javax.swing.JTable();
-        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -89,8 +102,8 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
 
         add(TableScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 640, 370));
 
-        addButton.setText("Add");
-        add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 80, -1));
+        editButton.setText("Edit");
+        add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 80, -1));
 
         removeButton.setText("Remove");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +112,14 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
             }
         });
         add(removeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 80, -1));
+
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
     private String getDeleteStatement() {
         var deleteStatement = "DELETE FROM " + tableName + " WHERE ";
@@ -118,6 +139,10 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         }
         return deleteStatement;
     }
+    
+    public JTable getTable(){
+        return dbTable;
+    }
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         int selectRow = dbTable.getSelectedRow();
@@ -131,11 +156,16 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         updateTable();
     }//GEN-LAST:event_removeButtonActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane TableScroll;
     private javax.swing.JButton addButton;
     private javax.swing.JTable dbTable;
+    private javax.swing.JButton editButton;
     private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 

@@ -15,6 +15,8 @@ public class EmployeePopup extends Popup {
     /**
      * Creates new form cPop
      */
+    private String empID;
+
     public EmployeePopup() {
         initComponents();
     }
@@ -48,8 +50,6 @@ public class EmployeePopup extends Popup {
 
         aLabel.setText("Address:");
         getContentPane().add(aLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
-
-        addressField.setText("jTextField3");
         getContentPane().add(addressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 107, 408, -1));
 
         sexLabel.setText("Sex:");
@@ -64,23 +64,70 @@ public class EmployeePopup extends Popup {
         });
         getContentPane().add(saveP, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
-public void insertIntoDB(String fName, String lName,String Sex,String Address){        
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible) {
+            var db = databases.get(0).getTable();
+            var selectedRow = db.getSelectedRow();
+            if (selectedRow != -1) {
+                for (var i = 0; i < db.getColumnCount(); i++) {
+                    // setDataComponent is a function you need to override
+                    // Once you override it you can update the fields with the new data
+                    var columnName = db.getColumnName(i);
+                    var cellValue = (String) db.getValueAt(selectedRow, i);
+                    setDataComponent(columnName, cellValue);
+
+                    // Store primary key(s) for later use
+                    if (columnName.equals("empID")) {
+                        empID = cellValue;
+                    }
+                }
+            }
+        } else if (!visible) {
+            addressField.setText("");
+            firstNameField.setText("");
+            lastNameField.setText("");
+            sexField.setText("");
+        }
+    }
+
+    @Override
+    public void setDataComponent(String columnName, String cellValue) {
+        if (columnName.equals("fName")) {
+            firstNameField.setText(cellValue);
+        } else if (columnName.equals("lName")) {
+            lastNameField.setText(cellValue);
+        } else if (columnName.equals("Sex")) {
+            sexField.setText(cellValue);
+        } else if (columnName.equals("Address")) {
+            addressField.setText(cellValue);
+        }
+    }
+
+    public void insertIntoDB(String fName, String lName, String Sex, String Address) {
         var triton = TritonDB.getInstance();
         var empID = Integer.parseInt(triton.selectMax("Employees", "empID")) + 1;
         var insert = "INSERT INTO Employees(empID,fName,lName,Sex,Address)\n";
-        insert += String.format("VALUES('%d', '%s','%s','%s','%s')", empID, fName, lName,Sex, Address);
+        insert += String.format("VALUES('%d', '%s','%s','%s','%s')", empID, fName, lName, Sex, Address);
         System.out.print(insert);
         triton.executeUpdate(insert);
-        
-}
+    }
+
     private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
-        var triton = TritonDB.getInstance();
         var fName = firstNameField.getText();
         var lName = lastNameField.getText();
         var Sex = sexField.getText();
         var Address = addressField.getText();
-        
-        insertIntoDB(fName, lName, Sex, Address);
+
+        if (!isEditMode) {
+            insertIntoDB(fName, lName, Sex, Address);
+        } else if (isEditMode) {
+            var triton = TritonDB.getInstance();
+            var insert = "UPDATE Employees\n";
+            insert += String.format("SET fName = '%s', lName = '%s', Sex = '%s', Address = '%s'", fName, lName, Sex, Address);
+            insert += "WHERE empID = " + empID;
+            triton.executeUpdate(insert);
+        }
         setVisible(false);
         save();
     }//GEN-LAST:event_savePActionPerformed

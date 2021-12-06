@@ -12,13 +12,19 @@ import ui.DatabaseEditor;
  * @author ezeha
  */
 public class Popup extends javax.swing.JFrame {
-    private ArrayList<DatabaseEditor> databases = new ArrayList<DatabaseEditor>();
-    
-    public void addDatabaseEditor(DatabaseEditor db){
+
+    protected ArrayList<DatabaseEditor> databases = new ArrayList<DatabaseEditor>();
+    public boolean isEditMode = false;
+
+    public void setDataComponent(String name, String value) {
+
+    }
+
+    public void addDatabaseEditor(DatabaseEditor db) {
         databases.add(db);
     }
-    
-    public void save(){
+
+    public void save() {
         databases.forEach(db -> {
             db.updateTable();
         });

@@ -101,6 +101,7 @@ public class TransactionPopup extends Popup {
         servicePlanCostLabel = new javax.swing.JTextField();
         appIDComboBox = new javax.swing.JComboBox<>();
 
+        setTitle("Add Transaction");
         setBackground(new java.awt.Color(119, 120, 119));
         setBounds(new java.awt.Rectangle(0, 0, 700, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -39,6 +39,7 @@ public class EmployeePopup extends Popup {
         sexField = new javax.swing.JTextField();
         saveP = new javax.swing.JButton();
 
+        setTitle("Add Employee");
         setBackground(new java.awt.Color(119, 120, 119));
         setBounds(new java.awt.Rectangle(0, 0, 600, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

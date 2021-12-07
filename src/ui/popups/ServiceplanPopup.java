@@ -96,6 +96,7 @@ public class ServiceplanPopup extends Popup {
         clientComboBox = new javax.swing.JComboBox<>();
         billCycleComboBox = new javax.swing.JComboBox<>();
 
+        setTitle("Add Service Plan");
         setBackground(new java.awt.Color(119, 120, 119));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -43,6 +43,7 @@ public void insertIntoDB(String mName){
         manTextField = new javax.swing.JTextField();
         saveP = new javax.swing.JButton();
 
+        setTitle("Add Manufacturer");
         setBackground(new java.awt.Color(119, 120, 119));
         setBounds(new java.awt.Rectangle(0, 0, 600, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

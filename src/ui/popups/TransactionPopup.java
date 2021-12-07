@@ -80,9 +80,9 @@ public class TransactionPopup extends Popup {
     
     public void insertIntoDB(String aID, int equipCost, int laborCost, int spCost){        
         var triton = TritonDB.getInstance();
-        var tID = triton.selectMax("Transactions", "tID") + 1;
+        var tID = Integer.parseInt(triton.selectMax("Transactions", "tID")) + 1;
         var insert = "INSERT INTO Transactions(tID, aID, EquipCost, LaborCost, SPCost)\n";
-        insert += String.format("VALUES('%s', '%s', %d, %d, %d)", tID, aID, equipCost, laborCost, spCost);
+        insert += String.format("VALUES('%d', '%s', %d, %d, %d)", tID, aID, equipCost, laborCost, spCost);
         triton.executeUpdate(insert);
     }
 

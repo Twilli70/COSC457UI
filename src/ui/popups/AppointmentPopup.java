@@ -148,9 +148,9 @@ public class AppointmentPopup extends Popup {
 
     public void insertToDB(String cID, String empID, String sDate, String eDate, String aLocation, int estimate){
         var triton = TritonDB.getInstance();
-        var aID = triton.selectMax("Appointment", "aID") + 1;
+        var aID = Integer.parseInt(triton.selectMax("Appointment", "aID")) + 1;
         var insert = "INSERT INTO Appointment(aID, c_ID, empID, sDate, eDate, aLocation, estimate)\n";
-        insert += String.format("VALUES('%s', '%s', '%s', '%s', '%s', '%d')", aID, empID, sDate, eDate, aLocation, estimate);
+        insert += String.format("VALUES('%d', '%s', '%s', '%s', '%s', '%d')", aID, empID, sDate, eDate, aLocation, estimate);
         triton.executeUpdate(insert);
     }
     

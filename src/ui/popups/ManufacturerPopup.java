@@ -27,9 +27,9 @@ public class ManufacturerPopup extends Popup {
     
 public void insertIntoDB(String mName){        
         var triton = TritonDB.getInstance();
-        var mID = triton.selectMax("Manufacturer", "mID") + 1;
+        var mID = Integer.parseInt(triton.selectMax("Manufacturer", "mID")) + 1;
         var insert = "INSERT INTO Manufacturer(mID,mName)\n";
-        insert += String.format("VALUES('%s', '%s')", mID, mName);
+        insert += String.format("VALUES('%d', '%s')", mID, mName);
         System.out.print(insert);
         triton.executeUpdate(insert);
     }

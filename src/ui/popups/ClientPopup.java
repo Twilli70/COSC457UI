@@ -97,9 +97,9 @@ public class ClientPopup extends Popup {
 
     public void insertIntoDB(String phone_number, String cAddr, String cEmail) {
         var triton = TritonDB.getInstance();
-        var cID = triton.selectMax("Client", "cID") + 1;
+        var cID = Integer.parseInt(triton.selectMax("Client", "cID")) + 1;
         var insert = "INSERT INTO Client(cID, phone_number, cAddr, cEmail)\n";
-        insert += String.format("VALUES('%s', '%s', '%s', '%s')", cID, phone_number, cAddr, cEmail);
+        insert += String.format("VALUES('%d', '%s', '%s', '%s')", cID, phone_number, cAddr, cEmail);
         triton.executeUpdate(insert);
     }
 

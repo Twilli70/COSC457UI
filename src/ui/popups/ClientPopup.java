@@ -11,22 +11,72 @@ import java.util.Hashtable;
 public class ClientPopup extends Popup {
 
     private Hashtable<Integer, String> clientIdByIndex = new Hashtable<Integer, String>();
+    private String clientID;
 
     public ClientPopup() {
         initComponents();
     }
-  @Override
-    public void setVisible(boolean visible){
+
+    @Override
+    public void setVisible(boolean visible) {
         super.setVisible(visible);
-        if (!visible){
+        if (visible) {
+            for (var dbe : databases) {
+                var db = dbe.getTable();
+                var selectedRow = db.getSelectedRow();
+                if (selectedRow != -1) {
+                    for (var i = 0; i < db.getColumnCount(); i++) {
+                        // setDataComponent is a function you need to override
+                        // Once you override it you can update the fields with the new data
+                        var columnName = db.getColumnName(i);
+                        var cellValue = (String) db.getValueAt(selectedRow, i);
+                        setDataComponent(columnName, cellValue);
+
+                        // Store primary key(s) for later use
+                        if (columnName.equals("cID")) {
+                            clientID = cellValue;
+                            try {
+                                var triton = TritonDB.getInstance();
+                                var result = triton.executeQuery("SELECT * FROM Client WHERE cID = " + cellValue);
+                                var rows = triton.getResultRows(result);
+                                var columns = triton.getResultColumns(result);
+                                for (var j = 0; j < columns.length; j++) {
+                                    setDataComponent(columns[j], rows[0][j]);
+                                }
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+
+        } else if (!visible) {
             addressTextField.setText("");
             firstNameField.setText("");
             lastNameField.setText("");
             emailField.setText("");
             phoneNumberField.setText("");
         }
-          
+
     }
+
+    public void setDataComponent(String columnName, String cellValue) {
+        if (columnName.equals("fName") || columnName.equals("bName")) {
+            firstNameField.setText(cellValue);
+        } else if (columnName.equals("lName")) {
+            lastNameField.setText(cellValue);
+        } else if (columnName.equals("phone_number")) {
+            phoneNumberField.setText(cellValue);
+        } else if (columnName.equals("cADDR")) {
+            addressTextField.setText(cellValue);
+        } else if (columnName.equals("cEmail")) {
+            emailField.setText(cellValue);
+        }
+
+    }
+
     public void insertIntoDB(String phone_number, String cAddr, String cEmail) {
         var triton = TritonDB.getInstance();
         var cID = triton.selectMax("Client", "cID") + 1;
@@ -129,24 +179,23 @@ public class ClientPopup extends Popup {
         var cEmail = emailField.getText();
         var fName = firstNameField.getText();
         var lName = lastNameField.getText();
-        
+
         var triton = TritonDB.getInstance();
         var clientInt = Integer.parseInt(triton.selectMax("Client", "cID")) + 1;
         var cID = String.format("%d", clientInt);
         var insert = "INSERT INTO Client(cID, phone_number, cAddr, cEmail)\n";
         insert += String.format("VALUES('%s', '%s', '%s', '%s')", cID, phone_number, cAddr, cEmail);
         triton.executeUpdate(insert);
-        
+
         var clientType = clientTypeComboBox.getSelectedIndex();
         if (clientType == 0) {
             insertIntoRDB(cID, fName, lName);
             insertIntoClientTypeDB(cID, true);
-        }
-        else if (clientType == 1) {
+        } else if (clientType == 1) {
             insertIntoBDB(cID, fName);
-            insertIntoClientTypeDB(cID,  false);
+            insertIntoClientTypeDB(cID, false);
         }
-        
+
         setVisible(false);
         save();
     }//GEN-LAST:event_savePActionPerformed

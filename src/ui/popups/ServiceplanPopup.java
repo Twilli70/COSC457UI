@@ -19,7 +19,7 @@ public class ServiceplanPopup extends Popup {
      * Creates new form cPop
      */
     private String cID;
-    private String sDate;
+    private String sDatePk;
     private Hashtable<Integer, String> clientIdByIndex = new Hashtable<Integer, String>();
 
     public ServiceplanPopup() {
@@ -49,7 +49,7 @@ public class ServiceplanPopup extends Popup {
                     if (columnName.equals("cID")) {
                         cID = cellValue;
                     } else if (columnName.equals("sDate")) {
-                        sDate = cellValue;
+                        sDatePk = cellValue;
                     }
                 }
             }
@@ -177,17 +177,17 @@ public class ServiceplanPopup extends Popup {
         getContentPane().add(edLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 130, -1, -1));
 
         spLabel.setText("Service Plan Cost:");
-        getContentPane().add(spLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        getContentPane().add(spLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         servicePlanCostField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 servicePlanCostFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(servicePlanCostField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 429, -1));
+        getContentPane().add(servicePlanCostField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 170, -1));
 
         bclabel1.setText("Bill Cycle:");
-        getContentPane().add(bclabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        getContentPane().add(bclabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         startDateChooser.setDateFormatString("yyyy-mm-dd ");
         getContentPane().add(startDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 120, -1));
@@ -217,7 +217,17 @@ public class ServiceplanPopup extends Popup {
         var sDateString = String.format("%d-%d-%d", sDate.getYear() + 1900, sDate.getMonth(), sDate.getDay());
         var eDateString = String.format("%d-%d-%d", eDate.getYear() + 1900, eDate.getMonth(), eDate.getDay());
 
-        insertToDB(cID, sDateString, eDateString, price, billCycle);
+        if (!isEditMode) {
+            insertToDB(cID, sDateString, eDateString, price, billCycle);
+        }
+        else if (isEditMode) {
+            var triton = TritonDB.getInstance();
+            var insert = "UPDATE Service_Plan\n";
+            insert += String.format("SET eDate = '%s', price = %d, billCycle = '%s'", eDateString, price, billCycle);
+            insert += "\nWHERE cID = " + cID;
+            insert += " AND sDate = '" + sDatePk + "'";
+            triton.executeUpdate(insert);
+        }
         setVisible(false);
         save();
     }//GEN-LAST:event_savePActionPerformed

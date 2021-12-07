@@ -25,6 +25,8 @@ public class ServiceplanPopup extends Popup {
     @Override
     public void setVisible(boolean visible){
         super.setVisible(visible);
+        if(visible)
+            updateClientComboBox();
         if (!visible)
          servicePlanCostField.setText("");
     }

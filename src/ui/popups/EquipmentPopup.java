@@ -24,7 +24,6 @@ public class EquipmentPopup extends Popup {
             updateManufacturerComboBox();
             var db = databases.get(0).getTable();
             var selectedRow = db.getSelectedRow();
-            System.out.println(isEditMode);
             if (selectedRow != -1 && isEditMode) {
                 for (var i = 0; i < db.getColumnCount(); i++) {
                     // setDataComponent is a function you need to override

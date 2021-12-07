@@ -17,75 +17,109 @@ public class TransactionPopup extends Popup {
     /**
      * Creates new form cPop
      */
-    private Hashtable<Integer,String> clientIdByIndex = new Hashtable<Integer,String>();
-    
+    private String tID;
+    private Hashtable<Integer, String> clientIdByIndex = new Hashtable<Integer, String>();
+
     public TransactionPopup() {
         initComponents();
     }
-    
+
     @Override
-    public void setVisible(boolean visible){
+    public void setVisible(boolean visible) {
         super.setVisible(visible);
-        if (visible)
+        if (visible) {
+            var db = databases.get(0).getTable();
+            var selectedRow = db.getSelectedRow();
+            if (selectedRow != -1 && isEditMode) {
+                for (var i = 0; i < db.getColumnCount(); i++) {
+                    // setDataComponent is a function you need to override
+                    // Once you override it you can update the fields with the new data
+                    var columnName = db.getColumnName(i);
+                    var cellValue = (String) db.getValueAt(selectedRow, i);
+                    setDataComponent(columnName, cellValue);
+
+                    // Store primary key(s) for later use
+                    if (columnName.equals("tID")) {
+                        tID = cellValue;
+                    }
+                }
+            }
             updateAppointmentComboBox();
-        if (!visible){
+        } else if (!visible) {
             equipmentCostLabel.setText("");
             laborCostLabel.setText("");
             servicePlanCostLabel.setText("");
         }
-          
+
     }
-    
-    public void updateAppointmentComboBox(){
+
+    @Override
+    public void setDataComponent(String columnName, String cellValue) {
+        if (columnName.equals("aID")) {
+            for (var i = 0; i < appIDComboBox.getItemCount(); i++) {
+                var appointment = appIDComboBox.getItemAt(0);
+                if (clientIdByIndex.get(i).equals(cellValue)) {
+                    appIDComboBox.setSelectedIndex(0);
+                    break;
+                }
+            }
+        } else if (columnName.equals("EquipCost")) {
+            equipmentCostLabel.setText(cellValue);
+        } else if (columnName.equals("LaborCost")) {
+            laborCostLabel.setText(cellValue);
+        } else if (columnName.equals("SPCost")) {
+            servicePlanCostLabel.setText(cellValue);
+        }
+    }
+
+    public void updateAppointmentComboBox() {
         appIDComboBox.removeAll();
         clientIdByIndex.clear();
         var triton = TritonDB.getInstance();
-        try{
-           var clients = new ArrayList<String>();
-           var result = triton.executeQuery("SELECT cID FROM Client");
-           var clientIDs = triton.getResultRows(result);
-           var index = 0;
-           for(var row : clientIDs){
-               var cID = row[0];
-               var idType = triton.getResultRows(triton.executeQuery("SELECT is_Res, is_Bus FROM Client_Type WHERE cID = " + cID));
-               var isResidential = idType[0][0].equals("1");
-               var isBusiness = idType[0][1].equals("1");
-               var clientName = "";
-               
-               if (isResidential){
-                   var resNameRows = triton.getResultRows(triton.executeQuery("SELECT fName, lName FROM Residential WHERE cID = " + cID));
-                   var firstName = resNameRows[0][0];
-                   var lastName = resNameRows[0][1];
-                   clientName = firstName + " " + lastName;
-               }
-               else if (isBusiness){
-                   var resNameRows = triton.getResultRows(triton.executeQuery("SELECT bName FROM Business WHERE cID = " + cID));
-                   var bName = resNameRows[0][0] + " (business)";
-                   clientName = bName;
-               }
-               var appointmentData = triton.getResultRows(triton.executeQuery("SELECT sDate, aLocation, aID FROM Appointment WHERE c_ID = " + cID));
-               if (appointmentData != null && !clientName.isEmpty()){
-                   var aID = appointmentData[0][2];
-                   appIDComboBox.addItem(String.format("With %s on %s at %s", clientName, appointmentData[0][0], appointmentData[0][1]));
-                   clientIdByIndex.put(index, aID);
-                   index++;
-               }
+        try {
+            var clients = new ArrayList<String>();
+            var result = triton.executeQuery("SELECT cID FROM Client");
+            var clientIDs = triton.getResultRows(result);
+            var index = 0;
+            for (var row : clientIDs) {
+                var cID = row[0];
+                var idType = triton.getResultRows(triton.executeQuery("SELECT is_Res, is_Bus FROM Client_Type WHERE cID = " + cID));
+                var isResidential = idType[0][0].equals("1");
+                var isBusiness = idType[0][1].equals("1");
+                var clientName = "";
 
-           }
-        }
-        catch (Exception e){
+                if (isResidential) {
+                    var resNameRows = triton.getResultRows(triton.executeQuery("SELECT fName, lName FROM Residential WHERE cID = " + cID));
+ 
+                    var firstName = resNameRows[0][0];
+                    var lastName = resNameRows[0][1];
+                    clientName = firstName + " " + lastName;
+                } else if (isBusiness) {
+                    var resNameRows = triton.getResultRows(triton.executeQuery("SELECT bName FROM Business WHERE cID = " + cID));
+                    var bName = resNameRows[0][0] + " (business)";
+                    clientName = bName;
+                }
+                var appointmentData = triton.getResultRows(triton.executeQuery("SELECT sDate, aLocation, aID FROM Appointment WHERE c_ID = " + cID));
+                if (appointmentData != null && !clientName.isEmpty()) {
+                    var aID = appointmentData[0][2];
+                    appIDComboBox.addItem(String.format("With %s on %s at %s", clientName, appointmentData[0][0], appointmentData[0][1]));
+                    clientIdByIndex.put(index, aID);
+                    index++;
+                }
+
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void insertIntoDB(String aID, int equipCost, int laborCost, int spCost){        
+
+    public void insertIntoDB(String aID, int equipCost, int laborCost, int spCost) {
         var triton = TritonDB.getInstance();
         var tID = Integer.parseInt(triton.selectMax("Transactions", "tID")) + 1;
         var insert = "INSERT INTO Transactions(tID, aID, EquipCost, LaborCost, SPCost)\n";
         insert += String.format("VALUES('%d', '%s', %d, %d, %d)", tID, aID, equipCost, laborCost, spCost);
         triton.executeUpdate(insert);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -137,8 +171,16 @@ public class TransactionPopup extends Popup {
         var equipCost = Integer.parseInt(equipmentCostLabel.getText());
         var laborCost = Integer.parseInt(laborCostLabel.getText());
         var SPCost = Integer.parseInt(servicePlanCostLabel.getText());
-        
-        insertIntoDB(aID, equipCost, laborCost, SPCost);
+
+        if (!isEditMode) {
+            insertIntoDB(aID, equipCost, laborCost, SPCost);
+        } else if (isEditMode) {
+            var triton = TritonDB.getInstance();
+            var insert = "UPDATE Transactions\n";
+            insert += String.format("SET aID = '%s', EquipCost = '%s', LaborCost = '%s', SPCost = '%s'", aID, equipCost, laborCost, SPCost);
+            insert += "\nWHERE tID = " + tID;
+            triton.executeUpdate(insert);
+        }
         setVisible(false);
         save();
     }//GEN-LAST:event_savePActionPerformed

@@ -41,8 +41,8 @@ public class ClientPage extends javax.swing.JPanel implements IPage{
 
         main1 = new cosc456_project.Main();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        residentialDBE = new ui.DatabaseEditor("Residential", new String[]{"cID"});
-        businessDBE = new ui.DatabaseEditor("Business", new String[]{"cID"});
+        residentialDBE = new ui.DatabaseEditor("Residential", new String[]{"cID"}, true);
+        businessDBE = new ui.DatabaseEditor("Business", new String[]{"cID"}, true);
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

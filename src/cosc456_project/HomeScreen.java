@@ -12,12 +12,12 @@ public class HomeScreen extends javax.swing.JFrame {
      * Creates new form homeScreen
      */
     private ClientPage clientPage = new ClientPage();
-    private DatabaseEditor employeePage = new DatabaseEditor("Employees", new String[]{"empID"});
-    private DatabaseEditor appointmentPage = new DatabaseEditor("Appointment", new String[]{"aID"});
-    private DatabaseEditor manufacturerPage = new DatabaseEditor("Manufacturer", new String[]{"mID"});
-    private DatabaseEditor equipmentPage = new DatabaseEditor("Equipment", new String[]{"eID"});
-    private DatabaseEditor transactionPage = new DatabaseEditor("Transactions", new String[]{"tID"});
-    private DatabaseEditor servicePlanPage = new DatabaseEditor("Service_Plan", new String[]{"cId, sDate"});
+    private DatabaseEditor employeePage = new DatabaseEditor("Employees", new String[]{"empID"}, false);
+    private DatabaseEditor appointmentPage = new DatabaseEditor("Appointment", new String[]{"aID"}, false);
+    private DatabaseEditor manufacturerPage = new DatabaseEditor("Manufacturer", new String[]{"mID"}, false);
+    private DatabaseEditor equipmentPage = new DatabaseEditor("Equipment", new String[]{"eID"}, false);
+    private DatabaseEditor transactionPage = new DatabaseEditor("Transactions", new String[]{"tID"}, false);
+    private DatabaseEditor servicePlanPage = new DatabaseEditor("Service_Plan", new String[]{"cId, sDate"}, false);
     private IPage currentPage;
 
     public HomeScreen() {

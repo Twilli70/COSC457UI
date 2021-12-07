@@ -202,6 +202,8 @@ public class ClientPopup extends Popup {
         var triton = TritonDB.getInstance();
 
         if (!isEditMode) {
+            System.out.println(triton.selectMax("Client", "cID"));
+      
             var clientInt = Integer.parseInt(triton.selectMax("Client", "cID")) + 1;
             var cID = String.format("%d", clientInt);
             var insert = "INSERT INTO Client(cID, phone_number, cAddr, cEmail)\n";

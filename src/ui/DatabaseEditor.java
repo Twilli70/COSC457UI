@@ -27,15 +27,17 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
     private String[] primaryKeys;
     private String tableName;
     private String populationStatement;
+    private boolean isClientInvolved = false;
 
     public DatabaseEditor() {
 
     }
 
-    public DatabaseEditor(String tabName, String[] pK) {
+    public DatabaseEditor(String tabName, String[] pK, boolean isClient) {
         initComponents();
         primaryKeys = pK;
         tableName = tabName;
+        isClientInvolved = isClient;
     }
 
     public void updateTable() {
@@ -66,7 +68,7 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+
                 if (dbTable.getSelectedRow() != -1) {
                     addDataWindow.isEditMode = true;
                     addDataWindow.setVisible(true);
@@ -123,25 +125,29 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
     private String getDeleteStatement() {
-        var deleteStatement = "DELETE FROM " + tableName + " WHERE ";
-        var primaryKeyCount = 0;
-        int selectRow = dbTable.getSelectedRow();
-        for (int i = 0; i < dbTable.getColumnCount(); i++) {
-            for (var pk : primaryKeys) {
-                dbTable.getColumnName(i);
-                if (pk.equals(dbTable.getColumnName(i))) {
-                    deleteStatement += pk + "=" + dbTable.getValueAt(selectRow, i);
-                    primaryKeyCount++;
-                    if (primaryKeyCount < primaryKeys.length) {
-                        deleteStatement += " AND ";
+        var deleteStatement = "";
+        if (!isClientInvolved) {
+            deleteStatement += "DELETE FROM " + tableName + " WHERE ";
+            var primaryKeyCount = 0;
+            int selectRow = dbTable.getSelectedRow();
+            for (int i = 0; i < dbTable.getColumnCount(); i++) {
+                for (var pk : primaryKeys) {
+                    dbTable.getColumnName(i);
+                    if (pk.equals(dbTable.getColumnName(i))) {
+                        deleteStatement += pk + "=" + dbTable.getValueAt(selectRow, i);
+                        primaryKeyCount++;
+                        if (primaryKeyCount < primaryKeys.length) {
+                            deleteStatement += " AND ";
+                        }
                     }
                 }
             }
         }
+        System.out.println(deleteStatement);
         return deleteStatement;
     }
-    
-    public JTable getTable(){
+
+    public JTable getTable() {
         return dbTable;
     }
 
@@ -149,8 +155,28 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         int selectRow = dbTable.getSelectedRow();
         var triton = TritonDB.getInstance();
         try {
-            triton.executeUpdate(getDeleteStatement());
+            if (isClientInvolved) {
+                if (isClientInvolved) {
+                    for (int i = 0; i < dbTable.getColumnCount(); i++) {
+                        for (var pk : primaryKeys) {
+                            dbTable.getColumnName(i);
+                            if (pk.equals(dbTable.getColumnName(i))) {
+                                triton.executeUpdate("DELETE FROM Client_Type WHERE cID = " + dbTable.getValueAt(selectRow, i));
+                                triton.executeUpdate("DELETE FROM Residential WHERE cID = " + dbTable.getValueAt(selectRow, i));
+                                triton.executeUpdate("DELETE FROM Business WHERE cID = " + dbTable.getValueAt(selectRow, i));
+                                triton.executeUpdate("DELETE FROM Appointment WHERE c_ID = " + dbTable.getValueAt(selectRow, i));
+                                triton.executeUpdate("DELETE FROM Service_Plan WHERE cID = " + dbTable.getValueAt(selectRow, i));
+                                triton.executeUpdate("DELETE FROM Client WHERE cID = " + dbTable.getValueAt(selectRow, i));
+                            }
+                        }
+                    }
 
+                }
+            }
+            else{
+                triton.executeUpdate(getDeleteStatement());
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

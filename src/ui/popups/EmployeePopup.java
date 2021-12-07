@@ -69,7 +69,7 @@ public class EmployeePopup extends Popup {
         if (visible) {
             var db = databases.get(0).getTable();
             var selectedRow = db.getSelectedRow();
-            if (selectedRow != -1) {
+            if (selectedRow != -1 && isEditMode) {
                 for (var i = 0; i < db.getColumnCount(); i++) {
                     // setDataComponent is a function you need to override
                     // Once you override it you can update the fields with the new data
@@ -124,7 +124,7 @@ public class EmployeePopup extends Popup {
             var triton = TritonDB.getInstance();
             var insert = "UPDATE Employees\n";
             insert += String.format("SET fName = '%s', lName = '%s', Sex = '%s', Address = '%s'", fName, lName, Sex, Address);
-            insert += "WHERE empID = " + empID;
+            insert += "\nWHERE empID = " + empID;
             triton.executeUpdate(insert);
         }
         setVisible(false);

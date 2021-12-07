@@ -33,7 +33,6 @@ public class ServiceplanPopup extends Popup {
         var triton = TritonDB.getInstance();
         var insert = "INSERT INTO Service_Plan(cID, sDate, eDate, price, billCycle)";
         insert += String.format("VALUES('%s', '%s', '%s', %d, '%s')", cID, sDateString, eDateString, price, billCycle);
-        System.out.println(insert);
     }
     
     public void updateClientComboBox(){

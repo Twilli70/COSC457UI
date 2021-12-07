@@ -8,7 +8,7 @@ package cosc456_project;
  *
  * @author trwil
  */
-public class Login extends javax.swing.JPanel {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
@@ -22,7 +22,6 @@ public class Login extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCalendar1 = new com.toedter.calendar.JCalendar();
         topIMG = new javax.swing.JLabel();
         loginBox = new javax.swing.JPanel();
         uLabel = new javax.swing.JLabel();
@@ -33,8 +32,8 @@ public class Login extends javax.swing.JPanel {
         loginBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(103, 110, 105));
-
-        topIMG.setIcon(new javax.swing.ImageIcon("C:\\Users\\trwil\\OneDrive\\Desktop\\New02-300x100.png")); // NOI18N
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(topIMG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 131));
 
         loginBox.setBackground(new java.awt.Color(154, 156, 154));
         loginBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
@@ -99,35 +98,19 @@ public class Login extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(topIMG)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addComponent(loginBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(topIMG, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(loginBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
-        );
+        add(loginBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 199, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
+        if (userNameField.getText().equals("admin") && passwordField.getText().equals("123")){
+            var homeScreen = new HomeScreen();
+            homeScreen.setVisible(true);
+            setVisible(false);
+        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JPanel loginBox;
     private javax.swing.JButton loginBtn;
     private javax.swing.JLabel pLabel;

@@ -8,54 +8,88 @@ import cosc456_project.TritonDB;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-
 public class EquipmentPopup extends Popup {
 
-    private Hashtable<Integer,String> manIdByIndex = new Hashtable<Integer,String>();
-
+    private Hashtable<Integer, String> manIdByIndex = new Hashtable<Integer, String>();
+    private String eID;
+    
     public EquipmentPopup() {
         initComponents();
     }
 
-  
-   @Override
-    public void setVisible(boolean visible){
+    @Override
+    public void setVisible(boolean visible) {
         super.setVisible(visible);
-        if (!visible){
+        if (visible) {
+            updateManufacturerComboBox();
+            var db = databases.get(0).getTable();
+            var selectedRow = db.getSelectedRow();
+            System.out.println(isEditMode);
+            if (selectedRow != -1 && isEditMode) {
+                for (var i = 0; i < db.getColumnCount(); i++) {
+                    // setDataComponent is a function you need to override
+                    // Once you override it you can update the fields with the new data
+                    var columnName = db.getColumnName(i);
+                    var cellValue = (String) db.getValueAt(selectedRow, i);
+                    setDataComponent(columnName, cellValue);
+
+                    // Store primary key(s) for later use
+                    if (columnName.equals("eID")) {
+                        eID = cellValue;
+                    }
+                }
+            }
+        }
+        else if (!visible) {
             equipmentCostField.setText("");
             equipmentNameField.setText("");
             equipmentTypeField.setText("");
             inventoryField.setText("");
         }
-          
+
     }
     
-    public void updateManufacturerComboBox(){
+    @Override
+    public void setDataComponent(String columnName, String cellValue) {
+        if (columnName.equals("mID")) {
+            //firstNameField.setText(cellValue);
+        } else if (columnName.equals("eName")) {
+            equipmentNameField.setText(cellValue);
+        } else if (columnName.equals("eCost")) {
+            equipmentCostField.setText(cellValue);
+        } else if (columnName.equals("eType")) {
+            equipmentTypeField.setText(cellValue);
+        } else if (columnName.equals("eStock")) {
+            inventoryField.setText(cellValue);
+        }
+    }
+    
+    public void updateManufacturerComboBox() {
         manIDComboBox.removeAll();
         manIdByIndex.clear();
         var triton = TritonDB.getInstance();
-        try{
-           var manufacturers = new ArrayList<String>();
-           var result = triton.executeQuery("SELECT mID FROM Manufacturer");
-           var manufacturerIDs = triton.getResultRows(result);
-           var index = 0;
-           for(var row : manufacturerIDs){
-               var mID = row[0];
-               //var mName = "";
-         
-               var manData = triton.getResultRows(triton.executeQuery("SELECT mID, mName FROM Manufacturer WHERE mID = " + mID));
-               if (manData != null ){
-                   manIDComboBox.addItem(String.format("ManufacturerID: %s ManufacturerName: %s ", manData[0][0], manData[0][1]));
-                   manIdByIndex.put(index, mID);
-                   index++;
-               }
+        try {
+            var manufacturers = new ArrayList<String>();
+            var result = triton.executeQuery("SELECT mID FROM Manufacturer");
+            var manufacturerIDs = triton.getResultRows(result);
+            var index = 0;
+            for (var row : manufacturerIDs) {
+                var mID = row[0];
+                //var mName = "";
 
-           }
-        }
-        catch (Exception e){
+                var manData = triton.getResultRows(triton.executeQuery("SELECT mID, mName FROM Manufacturer WHERE mID = " + mID));
+                if (manData != null) {
+                    manIDComboBox.addItem(String.format("ManufacturerID: %s ManufacturerName: %s ", manData[0][0], manData[0][1]));
+                    manIdByIndex.put(index, mID);
+                    index++;
+                }
+
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,23 +139,31 @@ public class EquipmentPopup extends Popup {
 
         getContentPane().add(manIDComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 430, -1));
     }// </editor-fold>//GEN-END:initComponents
-   public void insertIntoDB(String mID, String eName, int eCost, String eType, int eStock){        
+   public void insertIntoDB(String mID, String eName, int eCost, String eType, int eStock) {
         var triton = TritonDB.getInstance();
-        var eID = triton.selectMax("Equipment", "eID") + 1;
+        var eID = Integer.parseInt(triton.selectMax("Equipment", "eID")) + 1;
         var insert = "INSERT INTO Equipment(mID, eID, eName, eCost, eType, eStock)\n";
-        insert += String.format("VALUES('%s', '%s','%s', %d, '%s', %d)", mID, eID, eName, eCost, eType, eStock);
+        insert += String.format("VALUES('%s', '%d','%s', %d, '%s', %d)", mID, eID, eName, eCost, eType, eStock);
         System.out.print(insert);
         triton.executeUpdate(insert);
     }
     private void savePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePActionPerformed
         var triton = TritonDB.getInstance();
-        var mID = manIdByIndex.get(manIDComboBox.getSelectedIndex());
+        var manID = manIdByIndex.get(manIDComboBox.getSelectedIndex());
         var eName = equipmentNameField.getText();
         var eCost = Integer.parseInt(equipmentCostField.getText());
         var eType = equipmentTypeField.getText();
         var eStock = Integer.parseInt(inventoryField.getText());
-        insertIntoDB(mID,eName,eCost, eType, eStock);
-       
+        
+        if (!isEditMode){
+            insertIntoDB(manID, eName, eCost, eType, eStock);
+        } else if (isEditMode){
+            var insert = "UPDATE Equipment\n";
+            insert += String.format("SET mID = '%s', eName = '%s', eCost = '%s', eType = '%s', eStock = %d", manID, eName, eCost, eType, eStock);
+            insert += "\nWHERE eID = " + eID;
+            triton.executeUpdate(insert);
+        }
+        
         setVisible(false);
         save();
     }//GEN-LAST:event_savePActionPerformed

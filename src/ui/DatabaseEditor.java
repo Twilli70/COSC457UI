@@ -58,17 +58,18 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                addDataWindow.setVisible(true);
                 addDataWindow.isEditMode = false;
+                addDataWindow.setVisible(true);
             }
         });
 
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                
                 if (dbTable.getSelectedRow() != -1) {
-                    addDataWindow.setVisible(true);
                     addDataWindow.isEditMode = true;
+                    addDataWindow.setVisible(true);
                 }
             }
         });

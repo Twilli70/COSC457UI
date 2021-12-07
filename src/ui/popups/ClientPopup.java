@@ -20,11 +20,15 @@ public class ClientPopup extends Popup {
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
+        clientTypeComboBox.setEnabled(true);
+
         if (visible) {
             for (var dbe : databases) {
                 var db = dbe.getTable();
                 var selectedRow = db.getSelectedRow();
-                if (selectedRow != -1) {
+                if (selectedRow != -1 && isEditMode) {
+                    clientTypeComboBox.setEnabled(false);
+
                     for (var i = 0; i < db.getColumnCount(); i++) {
                         // setDataComponent is a function you need to override
                         // Once you override it you can update the fields with the new data
@@ -43,8 +47,14 @@ public class ClientPopup extends Popup {
                                 for (var j = 0; j < columns.length; j++) {
                                     setDataComponent(columns[j], rows[0][j]);
                                 }
+                                result = triton.executeQuery("SELECT * FROM Client_Type WHERE cID = " + cellValue);
+                                rows = triton.getResultRows(result);
+                                columns = triton.getResultColumns(result);
+                                for (var j = 0; j < columns.length; j++) {
+                                    setDataComponent(columns[j], rows[0][j]);
+                                }
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -73,6 +83,14 @@ public class ClientPopup extends Popup {
             addressTextField.setText(cellValue);
         } else if (columnName.equals("cEmail")) {
             emailField.setText(cellValue);
+        } else if (columnName.equals("is_Res")) {
+            if (cellValue.equals("1")) {
+                clientTypeComboBox.setSelectedIndex(0);
+            }
+        } else if (columnName.equals("is_Bus")) {
+            if (cellValue.equals("1")) {
+                clientTypeComboBox.setSelectedIndex(1);
+            }
         }
 
     }
@@ -179,21 +197,47 @@ public class ClientPopup extends Popup {
         var cEmail = emailField.getText();
         var fName = firstNameField.getText();
         var lName = lastNameField.getText();
-
-        var triton = TritonDB.getInstance();
-        var clientInt = Integer.parseInt(triton.selectMax("Client", "cID")) + 1;
-        var cID = String.format("%d", clientInt);
-        var insert = "INSERT INTO Client(cID, phone_number, cAddr, cEmail)\n";
-        insert += String.format("VALUES('%s', '%s', '%s', '%s')", cID, phone_number, cAddr, cEmail);
-        triton.executeUpdate(insert);
-
         var clientType = clientTypeComboBox.getSelectedIndex();
-        if (clientType == 0) {
-            insertIntoRDB(cID, fName, lName);
-            insertIntoClientTypeDB(cID, true);
-        } else if (clientType == 1) {
-            insertIntoBDB(cID, fName);
-            insertIntoClientTypeDB(cID, false);
+        var triton = TritonDB.getInstance();
+
+        if (!isEditMode) {
+            var clientInt = Integer.parseInt(triton.selectMax("Client", "cID")) + 1;
+            var cID = String.format("%d", clientInt);
+            var insert = "INSERT INTO Client(cID, phone_number, cAddr, cEmail)\n";
+            insert += String.format("VALUES('%s', '%s', '%s', '%s')", cID, phone_number, cAddr, cEmail);
+            triton.executeUpdate(insert);
+
+            if (clientType == 0) {
+                insertIntoRDB(cID, fName, lName);
+                insertIntoClientTypeDB(cID, true);
+            } else if (clientType == 1) {
+                insertIntoBDB(cID, fName);
+                insertIntoClientTypeDB(cID, false);
+            }
+        } else {
+            var insert = "UPDATE Client\n";
+            insert += String.format("SET phone_number = '%s', cADDR = '%s', cEmail = '%s'", phone_number, cAddr, cEmail);
+            insert += "WHERE cID = " + clientID;
+            triton.executeUpdate(insert);
+
+            var is_Res = clientType == 0 ? "1" : "0";
+            var is_Bus = clientType == 1 ? "1" : "0";
+            insert = "UPDATE Client_Type\n";
+            insert += String.format("SET is_Res = '%s', is_Bus = '%s'", is_Res, is_Bus);
+            insert += "\nWHERE cID = " + clientID;
+            triton.executeUpdate(insert);
+
+            if (is_Res.equals("1")) {
+                insert = "UPDATE Residential\n";
+                insert += String.format("SET fName = '%s', lName = '%s'", fName, lName);
+                insert += "\nWHERE cID = " + clientID;
+                triton.executeUpdate(insert);
+            } else if (is_Bus.equals("1")) {
+                insert = "UPDATE Business";
+                insert += String.format("SET fName = '%s', lName = '%s'", fName, lName);
+                insert += "\nWHERE cID = " + clientID;
+                triton.executeUpdate(insert);
+            }
         }
 
         setVisible(false);

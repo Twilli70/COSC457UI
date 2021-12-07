@@ -190,10 +190,10 @@ public class ServiceplanPopup extends Popup {
         bclabel1.setText("Bill Cycle:");
         getContentPane().add(bclabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
-        startDateChooser.setDateFormatString("yyyy-mm-dd ");
+        startDateChooser.setDateFormatString("yyyy-MM-dd ");
         getContentPane().add(startDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 120, -1));
 
-        endDateChooser.setDateFormatString("yyyy-mm-dd");
+        endDateChooser.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(endDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 120, -1));
 
         sdlabel1.setText("Start Date:");

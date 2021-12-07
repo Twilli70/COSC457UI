@@ -125,9 +125,8 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
         add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
     private String getDeleteStatement() {
-        var deleteStatement = "";
+        var deleteStatement = "DELETE FROM " + tableName + " WHERE ";
         if (!isClientInvolved) {
-            deleteStatement += "DELETE FROM " + tableName + " WHERE ";
             var primaryKeyCount = 0;
             int selectRow = dbTable.getSelectedRow();
             for (int i = 0; i < dbTable.getColumnCount(); i++) {
@@ -174,7 +173,9 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
                 }
             }
             else{
-                triton.executeUpdate(getDeleteStatement());
+                var statement = getDeleteStatement();
+                System.out.println(statement);
+                triton.executeUpdate(statement);
             }
             
         } catch (Exception e) {

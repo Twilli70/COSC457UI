@@ -95,7 +95,7 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="startDateChooser">
       <Properties>
-        <Property name="dateFormatString" type="java.lang.String" value="yyyy-mm-dd "/>
+        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd "/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -105,7 +105,7 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="endDateChooser">
       <Properties>
-        <Property name="dateFormatString" type="java.lang.String" value="yyyy-mm-dd"/>
+        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

@@ -17,7 +17,6 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,9 +30,11 @@ public class Login extends javax.swing.JFrame {
         userNameField1 = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
 
+        setTitle("Login");
         setBackground(new java.awt.Color(103, 110, 105));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(topIMG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 131));
+        setBounds(new java.awt.Rectangle(0, 0, 530, 540));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(topIMG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 131));
 
         loginBox.setBackground(new java.awt.Color(154, 156, 154));
         loginBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
@@ -98,15 +99,26 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(loginBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 199, -1, -1));
+        getContentPane().add(loginBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 199, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        if (userNameField.getText().equals("admin") && passwordField.getText().equals("123")){
-            var homeScreen = new HomeScreen();
-            homeScreen.setVisible(true);
-            setVisible(false);
+        var triton = TritonDB.getInstance();
+        try {
+            var result = triton.executeQuery("SELECT username, password FROM AdminLogin");
+            var rows = triton.getResultRows(result);
+            for (var r : rows) {
+                if (userNameField.getText().equals(r[0]) && passwordField.getText().equals(r[1])) {
+                    var homeScreen = new HomeScreen();
+                    homeScreen.setVisible(true);
+                    setVisible(false);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+
         }
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
 

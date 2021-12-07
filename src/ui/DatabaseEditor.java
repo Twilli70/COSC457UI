@@ -133,7 +133,7 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
                 for (var pk : primaryKeys) {
                     dbTable.getColumnName(i);
                     if (pk.equals(dbTable.getColumnName(i))) {
-                        deleteStatement += pk + "=" + dbTable.getValueAt(selectRow, i);
+                        deleteStatement += pk + "=" + "'" + dbTable.getValueAt(selectRow, i) + "'";
                         primaryKeyCount++;
                         if (primaryKeyCount < primaryKeys.length) {
                             deleteStatement += " AND ";
@@ -142,7 +142,6 @@ public class DatabaseEditor extends javax.swing.JPanel implements IPage {
                 }
             }
         }
-        System.out.println(deleteStatement);
         return deleteStatement;
     }
 

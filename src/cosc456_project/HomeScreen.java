@@ -17,7 +17,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private DatabaseEditor manufacturerPage = new DatabaseEditor("Manufacturer", new String[]{"mID"}, false);
     private DatabaseEditor equipmentPage = new DatabaseEditor("Equipment", new String[]{"eID"}, false);
     private DatabaseEditor transactionPage = new DatabaseEditor("Transactions", new String[]{"tID"}, false);
-    private DatabaseEditor servicePlanPage = new DatabaseEditor("Service_Plan", new String[]{"cId, sDate"}, false);
+    private DatabaseEditor servicePlanPage = new DatabaseEditor("Service_Plan", new String[]{"cID", "sDate"}, false);
     private IPage currentPage;
 
     public HomeScreen() {

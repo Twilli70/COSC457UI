@@ -31,10 +31,13 @@ public class Login extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
 
         setTitle("Login");
-        setBackground(new java.awt.Color(103, 110, 105));
-        setBounds(new java.awt.Rectangle(0, 0, 530, 540));
+        setBackground(new java.awt.Color(0, 0, 0));
+        setBounds(new java.awt.Rectangle(0, 0, 700, 700));
+        setForeground(java.awt.Color.white);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(topIMG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 131));
+
+        topIMG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cosc456_project/pic/New02-300x100.png"))); // NOI18N
+        getContentPane().add(topIMG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 131));
 
         loginBox.setBackground(new java.awt.Color(154, 156, 154));
         loginBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
